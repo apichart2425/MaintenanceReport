@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b0252c0-1910-4e33-b2b6-e851d95c8848" name="Default Changelist" comment="" />
+    <list default="true" id="0b0252c0-1910-4e33-b2b6-e851d95c8848" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MaintenanceReport/reports/models.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +24,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MaintenanceReport/MaintenanceReport/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="256">
               <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="18" column="81" selection-start-line="18" selection-start-column="81" selection-end-line="18" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -66,6 +77,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -76,15 +90,17 @@
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/views.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/index.html" />
         <option value="$PROJECT_DIR$/MaintenanceReport/MaintenanceReport/settings.py" />
+        <option value="$PROJECT_DIR$/MaintenanceReport/reports/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1007" />
-    <option name="y" value="62" />
+    <option name="x" value="365" />
+    <option name="y" value="60" />
     <option name="width" value="1438" />
-    <option name="height" value="887" />
+    <option name="height" value="898" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -113,13 +129,6 @@
               <item name="WebProject" type="462c0819:PsiDirectoryNode" />
               <item name="MaintenanceReport" type="462c0819:PsiDirectoryNode" />
               <item name="reports" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebProject" type="462c0819:PsiDirectoryNode" />
-              <item name="MaintenanceReport" type="462c0819:PsiDirectoryNode" />
-              <item name="reports" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -153,13 +162,13 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="715" y="93" width="1150" height="709" extended-state="0" />
+    <frame x="292" y="48" width="1150" height="718" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24977538" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24977538" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" visible="true" weight="0.3289256" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32410422" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.3289256" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="4" />
@@ -233,6 +242,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="81" selection-start-line="18" selection-start-column="81" selection-end-line="18" selection-end-column="81" />
         </state>
       </provider>
     </entry>
