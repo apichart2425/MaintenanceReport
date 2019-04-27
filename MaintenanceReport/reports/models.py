@@ -35,5 +35,30 @@ class Maintenance(models.Model):
     state = models.CharField(max_length=3, choices=TYPES, default='01')
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
 
+class Machine(models.Model):
+    mac_id = models.AutoField(primary_key=True)
+    mac_name = models.CharField(max_length=255)
+    mac_sum =  models.CharField(max_length=255)
+    mac_desc = models.TextField()
 
+class Part(models.Model):
+    part_id = models.AutoField(primary_key=True)
+    part_name = models.CharField(max_length=255)
+    category = models.TextField
+    cost = models.DecimalField(max_digits=8, decimal_places=2)
+    part_desc = models.CharField(max_length=255)
+    stock = models.IntegerField()
+    minimum_stock = models.IntegerField()
 
+class Machine_Part(models.Model):
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    unit = models.IntegerField()
+    maintenance = models.ManyToManyField(Maintenance, through='Maintenance_Machine_Part')
+    class Meta:
+        unique_together = (('part','machine'),)
+
+class Maintenance_Machine_Part(models.Model):
+    maintenance = models.ForeignKey(Maintenance, on_delete=models.CASCADE)
+    machine_part = models.ForeignKey(Machine_Part, on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
