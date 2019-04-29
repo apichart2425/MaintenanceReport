@@ -58,8 +58,8 @@ class Part(models.Model):
     minimum_stock = models.IntegerField()
 
 class Machine_Part(models.Model):
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True, primary_key=True)
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE, unique=True)
     unit = models.IntegerField()
     maintenance = models.ManyToManyField(Maintenance, through='Maintenance_Machine_Part')
     class Meta:

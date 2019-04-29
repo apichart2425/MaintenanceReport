@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b0252c0-1910-4e33-b2b6-e851d95c8848" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/MaintenanceReport/reports/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/migrations/0002_account.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/migrations/0003_engineer.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MaintenanceReport/reports/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="312">
-              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+              <caret line="68" column="74" selection-start-line="68" selection-start-column="74" selection-end-line="68" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -242,7 +243,7 @@
     <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
-          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+          <caret line="68" column="74" selection-start-line="68" selection-start-column="74" selection-end-line="68" selection-end-column="74" />
         </state>
       </provider>
     </entry>
