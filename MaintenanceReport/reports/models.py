@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+class Account(models.Model):
+    employee = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+
 
 class Employee(models.Model):
     emp_fname = models.CharField(max_length=255)
@@ -17,8 +20,11 @@ class Employee(models.Model):
         (ENGINEER, 'engineer')
     )
     type = models.CharField(max_length=3, choices=TYPES, default='01', null=False)
-
     emp_salary = models.DecimalField(max_digits=8, decimal_places=2)
+
+class Engineer(models.Model):
+    employee = models.OneToOneField('Employee', primary_key=True, on_delete=models.CASCADE)
+    eng_type = models.CharField(max_length=255)
 
 class Maintenance(models.Model):
     name = models.CharField(max_length=255)
@@ -33,12 +39,13 @@ class Maintenance(models.Model):
         (SUCCEED, 'Succeed')
     )
     state = models.CharField(max_length=3, choices=TYPES, default='01')
+
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
 
 class Machine(models.Model):
     mac_id = models.AutoField(primary_key=True)
     mac_name = models.CharField(max_length=255)
-    mac_sum =  models.CharField(max_length=255)
+    mac_sum = models.CharField(max_length=255)
     mac_desc = models.TextField()
 
 class Part(models.Model):
