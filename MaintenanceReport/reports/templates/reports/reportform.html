@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReportForm</title>
+</head>
+<body>
+    <h1>แจ้งซ่อมเครื่องจักร</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+        <label>ชื่อเครื่องจักร</label><br>
+        {{form.machine}}
+        </p>
+        <p>
+        <p>
+        <label>รายละเอียดอาการของเครื่องที่เสีย</label><br>
+        {{form.desc}}
+        </p>
+        <!--{{form}}-->
+        <input type="submit" value="แจ้ง">
+    </form>
+</body>
+</html>

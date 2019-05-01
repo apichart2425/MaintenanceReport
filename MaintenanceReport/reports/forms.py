@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Employee
+from .models import Employee, Maintenance
 
 
 class RegisterModelForm(forms.ModelForm):
@@ -11,3 +11,10 @@ class RegisterModelForm(forms.ModelForm):
     class Meta:
         model = Employee
         exclude = ['employee']
+
+
+class ReportModelForm(forms.ModelForm):
+    class Meta:
+        model = Maintenance
+        exclude = ['id', 'datetime', 'state', 'employee']
+        # fields = '__all__'

@@ -7,6 +7,22 @@
 </head>
 <body>
     <h1>{{ page_title }}</h1>
+    <table>
+        <tr>
+            <td>เครื่องจักร</td>
+            <td>วันเวลา</td>
+            <td>รายละเอียด</td>
+            <td>สถานะ</td>
+        </tr>
+        {% for form in formset %}
+        <tr>
+            <td>{{form.machine}}</td>
+            <td>{{form.datetime}}</td>
+            <td>{{form.desc}}</td>
+            <td>{{form.state}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <img src="{% static 'images/test.png' %}" style="width:20%">
     <img src="{% static 'reports/images/test2.png' %}" style="width:20%">
 </body>

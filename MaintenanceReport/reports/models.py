@@ -21,25 +21,12 @@ class Employee(models.Model):
     type = models.CharField(max_length=3, choices=TYPES, default='01', null=False)
     emp_salary = models.DecimalField(max_digits=8, decimal_places=2)
 
+    def __str__(self):
+        return self.emp_fname
+
 class Engineer(models.Model):
     employee = models.OneToOneField('Employee', primary_key=True, on_delete=models.CASCADE)
     eng_type = models.CharField(max_length=255)
-
-class Maintenance(models.Model):
-    name = models.CharField(max_length=255)
-    datetime = models.DateField()
-
-    PENDING = '01'
-    INPROGRESS = '02'
-    SUCCEED = '03'
-    TYPES = (
-        (PENDING, 'Pending'),
-        (INPROGRESS, 'Inprogress'),
-        (SUCCEED, 'Succeed')
-    )
-    state = models.CharField(max_length=3, choices=TYPES, default='01')
-
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
 
 class Machine(models.Model):
     mac_id = models.AutoField(primary_key=True)
@@ -47,10 +34,30 @@ class Machine(models.Model):
     mac_sum = models.CharField(max_length=255)
     mac_desc = models.TextField()
 
+    def __str__(self):
+        return self.mac_name
+
+
+class Maintenance(models.Model):
+    machine = models.ForeignKey(Machine, on_delete=models.PROTECT)
+    datetime = models.DateTimeField()
+    PENDING = 'Pending'
+    INPROGRESS = 'Inprogress'
+    SUCCEED = 'Succeed'
+    TYPES = (
+        (PENDING, 'Pending'),
+        (INPROGRESS, 'Inprogress'),
+        (SUCCEED, 'Succeed')
+    )
+    state = models.CharField(max_length=50, choices=TYPES, default='Pending')
+    desc = models.TextField()
+    employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
+
+
 class Part(models.Model):
     part_id = models.AutoField(primary_key=True)
     part_name = models.CharField(max_length=255)
-    category = models.TextField
+    # category = models.TextField
     cost = models.DecimalField(max_digits=8, decimal_places=2)
     part_desc = models.CharField(max_length=255)
     stock = models.IntegerField()
