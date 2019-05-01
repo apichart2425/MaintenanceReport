@@ -1,15 +1,14 @@
 from django.db import models
 
 # Create your models here.
-class Account(models.Model):
-    employee = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-
-
 class Employee(models.Model):
+
+    employee = models.OneToOneField('auth.User', on_delete=models.CASCADE, primary_key=True)
     emp_fname = models.CharField(max_length=255)
     emp_lname = models.CharField(max_length=255)
     emp_phone = models.CharField(max_length=10)
-    emp_address = models.EmailField(max_length=255)
+    emp_email = models.EmailField(max_length=255)
+    emp_address = models.TextField()
 
     WEAVERS = '01'
     SUPERVISOR = '02'
@@ -58,7 +57,7 @@ class Part(models.Model):
     minimum_stock = models.IntegerField()
 
 class Machine_Part(models.Model):
-    part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True, primary_key=True)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True)
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE, unique=True)
     unit = models.IntegerField()
     maintenance = models.ManyToManyField(Maintenance, through='Maintenance_Machine_Part')

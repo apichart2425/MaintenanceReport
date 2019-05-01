@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+        <label>ชื่อผู้ใช้</label><br>
+        {{form.user}}
+        </p>
+        <p>
+        <label>รหัสผ่าน</label><br>
+        {{form.password}}
+        </p>
+        <p>
+        <label>ยินยันรหัสผ่าน</label><br>
+        {{form.re_password}}
+        </p>
+        <p>
+        <label>ชื่อจริง</label><br>
+        {{form.emp_fname}}
+        </p>
+        <p>
+            <label>นามสกุล</label><br>
+            {{form.emp_lname}}
+        </p>
+        <p>
+            <label>เบอร์โทรศัพท์</label><br>
+            {{form.emp_phone}}
+        </p>
+        <p>
+            <label>อีเมล์</label><br>
+            {{form.emp_email}}
+        </p>
+        <p>
+            <label>ที่อยู่</label><br>
+            {{form.emp_address}}
+        </p>
+        <p>
+            <label>ตำแหน่ง</label><br>
+            {{form.type}}
+        </p>
+        <p>
+            <label>เงินเดือน</label><br>
+            {{form.emp_salary}}
+        </p>
+        <input type="submit" value="สมัคร">
+    </form>
+
+</body>
+</html>
