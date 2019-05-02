@@ -18,3 +18,12 @@ class ReportModelForm(forms.ModelForm):
         model = Maintenance
         exclude = ['id', 'datetime', 'state', 'employee']
         # fields = '__all__'
+
+
+class ReportForm(forms.Form):
+    CHOICES = Maintenance.TYPES
+    id = forms.IntegerField()
+    machine = forms.CharField(max_length=255)
+    datetime = forms.DateTimeField()
+    desc = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}))
+    state = forms.ChoiceField(choices=CHOICES)

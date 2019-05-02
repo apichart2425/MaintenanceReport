@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Maintenance
-from .forms import RegisterModelForm, ReportModelForm
+from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
 
 def index(request):
@@ -117,8 +117,18 @@ def detail(request, maintenance_id):
                 'state': detail.state,
                 'desc': detail.desc
             }]
-    ReportFormSet = formset_factory(ReportModelForm, max_num=len(data))
-    formset = ReportFormSet(initial=data)
+    ReportFormSet = formset_factory(ReportForm, max_num=len(data))
+    if request.method == 'POST':
+        formset = ReportFormSet(request.POST)
+        if formset.is_valid():
+            for report_form in formset:
+                report = Maintenance.objects.get(id=report_form.cleaned_data.get('id'))
+                if report:
+                    report.state = report_form.cleaned_data.get('state')
+                    report.save()
+                    return redirect('index')
+    else:
+        formset = ReportFormSet(initial=data)
     context['maintenance'] = data
     context['formset'] = formset
     return render(request, 'reports/detail.html', context=context)

@@ -20,7 +20,7 @@
             <td>{{form.datetime}}</td>
             <td>{{form.desc}}</td>
             {% if user.groups.all.0.name == "engineer" %}
-                <td><button type="button"><a href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}{{form.id}}</a></button></td>
+                <td><button type="button"><a href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></button></td>
             {% else %}
                 <td><button type="button">{{form.state}}</button></td>
             {% endif %}
