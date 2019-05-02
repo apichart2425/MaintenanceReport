@@ -11,6 +11,10 @@ from .models import Maintenance
 from .forms import RegisterModelForm, ReportModelForm
 
 
+def nav(request):
+    context = {}
+    return render(request, 'reports/basenav.html.html', context=context)
+
 def index(request):
     data = []
     context = {}
@@ -44,6 +48,7 @@ def my_login(request):
             login(request, user)
             next_url = request.POST.get('next_url')
             if next_url:
+                print('conneting')
                 return redirect(next_url)
 
         else:
