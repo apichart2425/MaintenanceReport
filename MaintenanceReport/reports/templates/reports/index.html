@@ -28,8 +28,11 @@
         {% endfor %}
     </table>
     {{ user.groups.all.0}}
-    <button type="button"><a href="{% url 'register' %}">สมัครสมาชิค</a></button>
+    {% if user.groups.all.0.name == "supervisors" %}
+        <button type="button"><a href="{% url 'register' %}">สมัครสมาชิค</a></button>
+    {% endif %}
     <button type="button"><a href="{% url 'reportform' %}">แจ้งซ่อม</a></button>
+    <button type="button"><a href="{% url 'logout' %}">logout</a></button>
     <img src="{% static 'images/test.png' %}" style="width:20%">
     <img src="{% static 'reports/images/test2.png' %}" style="width:20%">
 </body>
