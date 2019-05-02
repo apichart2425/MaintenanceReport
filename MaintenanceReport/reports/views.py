@@ -19,6 +19,7 @@ def index(request):
     for detail in test.all():
         data.append(
             {
+                'id': detail.id,
                 'machine': detail.machine,
                 'datetime': detail.datetime,
                 'state': detail.state,
@@ -83,6 +84,7 @@ def my_register(request):
             check = form.save(commit=False)
             check.employee_id = user.id
             form.save()
+            return redirect('index')
 
     form = RegisterModelForm()
     context = {'form': form}
@@ -104,3 +106,20 @@ def report_form(request):
     form = ReportModelForm()
     context = {'form': form}
     return render(request,'reports/reportform.html', context=context)
+
+def detail(request, maintenance_id):
+    context = {}
+    detail = Maintenance.objects.get(pk=maintenance_id)
+    data = [{
+                'id': detail.id,
+                'machine': detail.machine,
+                'datetime': detail.datetime,
+                'state': detail.state,
+                'desc': detail.desc
+            }]
+    ReportFormSet = formset_factory(ReportModelForm, max_num=len(data))
+    formset = ReportFormSet(initial=data)
+    context['maintenance'] = data
+    context['formset'] = formset
+    return render(request, 'reports/detail.html', context=context)
+
