@@ -1,6 +1,7 @@
 import datetime
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms import formset_factory
 from django.http import HttpResponse
@@ -10,7 +11,7 @@ from django.shortcuts import render, redirect
 from .models import Maintenance
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
-
+@login_required
 def index(request):
     data = []
     context = {}
@@ -46,6 +47,8 @@ def my_login(request):
             next_url = request.POST.get('next_url')
             if next_url:
                 return redirect(next_url)
+            else:
+                return redirect('index')
 
         else:
             context['username'] = username
@@ -56,6 +59,7 @@ def my_login(request):
         context['next_url'] = next_url
     return render(request, 'reports/login.html', context)
 
+@login_required
 def my_register(request):
     if request.method == 'POST':
         form = RegisterModelForm(request.POST)
@@ -90,6 +94,7 @@ def my_register(request):
     context = {'form': form}
     return render(request,'reports/register.html', context=context)
 
+@login_required
 def report_form(request):
     if request.method == 'POST':
         form = ReportModelForm(request.POST)
@@ -107,6 +112,7 @@ def report_form(request):
     context = {'form': form}
     return render(request,'reports/reportform.html', context=context)
 
+@login_required
 def detail(request, maintenance_id):
     context = {}
     detail = Maintenance.objects.get(pk=maintenance_id)
@@ -133,3 +139,6 @@ def detail(request, maintenance_id):
     context['formset'] = formset
     return render(request, 'reports/detail.html', context=context)
 
+def my_logout(request):
+    logout(request)
+    return  redirect('login')
