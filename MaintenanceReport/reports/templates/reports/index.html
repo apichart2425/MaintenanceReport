@@ -33,6 +33,9 @@
     {% endif %}
     <button type="button"><a href="{% url 'reportform' %}">แจ้งซ่อม</a></button>
     <button type="button"><a href="{% url 'logout' %}">logout</a></button>
+    {% if user.groups.all.0.name == "engineer" %}
+    <button><a href="{% url 'selectmachine' %}">เบิกอะไหล่</a></button>
+    {% endif %}
     <img src="{% static 'images/test.png' %}" style="width:20%">
     <img src="{% static 'reports/images/test2.png' %}" style="width:20%">
 </body>

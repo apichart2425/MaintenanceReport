@@ -70,7 +70,9 @@ class Category_Part(models.Model):
     p = models.ForeignKey(Part, on_delete=models.CASCADE)
     c = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-
+class Machine_Category(models.Model):
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 class Machine_Part(models.Model):
     part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True)
@@ -89,10 +91,12 @@ class Cart(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     part = models.ForeignKey(Part, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+    for_machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
 
 class Order(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     part = models.ForeignKey(Part, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     datetime = models.DateTimeField()
+    for_machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
 

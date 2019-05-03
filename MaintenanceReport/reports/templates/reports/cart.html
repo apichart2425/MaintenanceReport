@@ -5,15 +5,29 @@
     <title>Cart</title>
 </head>
 <body>
-    {% for item in item_list %}
-        <!--{{ item.part_id }}-->
-        {{ item.part_name}}
-        {{ item.cost}}
-        {{ item.quantity }}
-    <a href="{% url 'deleteitem' item.part_id %}">delete</a>
-    <br>
-    {% endfor %}
-    <a href="{% url 'stockpick' %}">กลับไปเลือกของต่อ</a>
-    <a href="{% url 'pickupconfirm' %}">ดำเนินการต่อ</a>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>ชื่ออะไหล่</th>
+                <th>ราคา</th>
+                <th>จำนวน</th>
+                <th>สำหรับเครื่องจักร</th>
+            </tr>
+            {% for item in item_list %}
+            <tr>
+                <td>{{ item.part_name}}</td>
+                <td>{{ item.cost}}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.for_machine_name}}</td>
+                <td><a href="{% url 'deleteitem' item.part_id item.for_machine_id %}">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="ดำเนินการต่อ">
+    </form>
+    <a href="{% url 'stockpick' category_id machine_id %}">กลับ</a>
+
+
 </body>
 </html>

@@ -8,25 +8,36 @@
 </head>
 
 <body>
-{% for stock in stock_list %}
-    {{stock.c_code}}
-    {{stock.c_name}}
-    <br>
-{% endfor %}
 
-{% for stock in stock_part %}
-    {{stock.c_id}}
-    {{stock.p_id}}
-    {{stock.part_name}}
-    {{stock.cost}}
-    {{stock.part_desc}}
-    {{stock.stock}}
-    {{stock.minimum_stock}}
-    <a href="{% url 'addtocart' stock.p_id %}"> add </a>
-    <br>
-{% endfor %}
-<a href="{% url 'cart' %}">cart</a>
+<table>
+    <tr>
+        <th>ชื่ออุปกรณ์</th>
+        <th>หมายเลขชิ้นส่วน</th>
+        <th>ชื่อชิ้นส่วน</th>
+        <th>ราคา</th>
+        <th>คำอธิบาย</th>
+        <th>จำนวนที่มีในคลัง</th>
+        <th>minimum</th>
+
+    </tr>
+    {% for stock in stock_part %}
+    <tr>
+        <td>{{stock.c_name}}</td>
+        <td>{{stock.p_id}}</td>
+        <td>{{stock.part_name}}</td>
+        <td>{{stock.cost}}</td>
+        <td>{{stock.part_desc}}</td>
+        <td>{{stock.stock}}</td>
+        <td>{{stock.minimum_stock}}</td>
+        <td><a href="{% url 'addtocart' stock.p_id machine_id %}"> add </a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'cart' category_id machine_id %}">cart</a>
 <a href="{% url 'index' %}">index</a>
+<a href="{% url 'selectcategory' machine_id %}">กลับ</a>
+
 
   </body>
 

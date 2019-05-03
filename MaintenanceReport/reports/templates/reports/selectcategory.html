@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>รหัสอุปกรณ์</th>
+            <th>ชื่ออุปกรณ์</th>
+        </tr>
+        {% for category_item in category %}
+        <tr>
+            <td>{{category_item.c_code}}</td>
+            <td>{{category_item.c_name}}</td>
+            <td><a href="{% url 'stockpick' category_item.id machine_id %}">เลือก</a></td>
+        </tr>
+            {% endfor %}
+    </table>
+    <a href="{% url 'selectmachine' %}">กลับ</a>
+</body>
+</html>
