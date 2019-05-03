@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+    {% for item in item_list %}
+        <!--{{ item.part_id }}-->
+        {{ item.part_name}}
+        {{ item.cost}}
+        {{ item.quantity }}
+    <a href="{% url 'deleteitem' item.part_id %}">delete</a>
+    <br>
+    {% endfor %}
+    <a href="{% url 'stockpick' %}">กลับไปเลือกของต่อ</a>
+    <a href="{% url 'pickupconfirm' %}">ดำเนินการต่อ</a>
+</body>
+</html>

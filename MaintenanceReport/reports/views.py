@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import Maintenance, Category, Category_Part, Part
+from .models import Maintenance, Category, Category_Part, Part, Cart, Order
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
 
@@ -167,3 +167,66 @@ def stock_list(request):
     }
 
     return render(request, template_name='reports/stockpick.html', context=context)
+
+def addtocart(request, part_id):
+    part = Part.objects.get(id=part_id)
+    part_stock = part.stock
+    if part_stock > 0:
+        part.stock = part_stock-1
+        try:
+            cart = Cart.objects.get(part_id=part_id)
+            print(cart)
+            cart.quantity = cart.quantity+1
+            cart.save()
+
+        except Cart.DoesNotExist:
+            print("NONONO")
+            Cart.objects.create(
+                employee_id=request.user.id,
+                part_id=part_id,
+                quantity=1
+            )
+    else:
+        print('OUT OF STOCK')
+    part.save()
+
+    return redirect('stockpick')
+
+def cart(request):
+    data = []
+    cart = Cart.objects.filter(employee_id=request.user.id)
+    for item in cart:
+        part = Part.objects.get(pk=item.part_id)
+        data.append({
+            'quantity':item.quantity,
+            'employee_id':request.user.id,
+            'part_id':item.part_id,
+            'part_name':part.part_name,
+            'cost':part.cost
+        })
+    context = {
+        'item_list': data
+    }
+    return render(request, template_name='reports/cart.html', context=context)
+
+def deleteitem(request, part_id):
+    cart = Cart.objects.get(part_id=part_id)
+    part = Part.objects.get(id=part_id)
+    part.stock = part.stock+cart.quantity
+    part.save()
+    cart.delete()
+
+    return redirect('cart')
+
+def pickupconfirm(request):
+    cart_list = Cart.objects.filter(employee_id=request.user.id)
+    for item in cart_list:
+        Order.objects.create(
+            quantity=item.quantity,
+            datetime=datetime.datetime.today(),
+            employee_id=request.user.id,
+            part_id=item.part_id
+        )
+    cart_list.delete()
+
+    return redirect('stockpick')

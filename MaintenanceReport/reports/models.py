@@ -84,3 +84,15 @@ class Maintenance_Machine_Part(models.Model):
     maintenance = models.ForeignKey(Maintenance, on_delete=models.CASCADE)
     machine_part = models.ForeignKey(Machine_Part, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
+
+class Cart(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+class Order(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    datetime = models.DateTimeField()
+

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
 
+<body>
 {% for stock in stock_list %}
     {{stock.c_code}}
     {{stock.c_name}}
@@ -20,7 +22,12 @@
     {{stock.part_desc}}
     {{stock.stock}}
     {{stock.minimum_stock}}
+    <a href="{% url 'addtocart' stock.p_id %}"> add </a>
     <br>
 {% endfor %}
-</body>
+<a href="{% url 'cart' %}">cart</a>
+<a href="{% url 'index' %}">index</a>
+
+  </body>
+
 </html>
