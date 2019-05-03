@@ -1,13 +1,7 @@
-<!DOCTYPE html>
+{% extends "reports/base_template.html" %}
+
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% block stylepage %}
     <style>
         .headtable{
             font-size: 2.5vh;
@@ -26,94 +20,58 @@
             margin-left: auto;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 <div class="containerPage my-5">
     <div class="row">
-        <h1 class="my-5 col-6">รายการแจ้งซ้อมอุปกรณ์</h1>
-        <a class=" col-6" href="{% url 'reportform' %}">แจ้งซ่อม</a>
+        <h1 class=" col-6">รายการแจ้งซ้อมอุปกรณ์</h1>
+    </div>
+    <div class="border border-primary rounded p-3 my-3 px-5 py-3">
+        <table class="table table-hover">
+            <thead>
+                <tr class="headtable row">
+                    <th class="col-2">เครื่องจักร</th>
+                    <th class="col-2">วันเวลา</th>
+                    <th class="col-6">รายละเอียด</th>
+                    <th class="col-2">สถานะ</th>
+                </tr>
+            </thead>
+            {% for form in formset %}
+            <tr class="row">
+                <td class="col-2">{{form.machine}}</td>
+                <td class="col-2">{{form.datetime}}</td>
+                <td class="col-6">{{form.desc}}</td>
+                {% if user.groups.all.0.name == "engineer" %}
+                {% if form.state == 'Succeed'%}
+                <td class="col-2"><a class="btn btn-success status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
+                {% elif form.state == 'Pending'%}
+                <td class="col-2"><a class="btn btn-secondary status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
+                {% elif form.state == 'Inprogress'%}
+                <td class="col-2"><a class="btn btn-warning status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
+                {% endif %}
+                {% else %}
+                {% if form.state == 'Succeed'%}
+                <td class="col-2"><p class="text-white bg-success status btn-sm textCenter" style="width: 6rem;">{{form.state}}</p></td>
+                {% elif form.state == 'Pending'%}
+                <td class="col-2"><p class="text-white bg-secondary status btn-sm textCenter" style="width: 6rem;">{{form.state}}</p></td>
+                {% elif form.state == 'Inprogress'%}
+                <td class="col-2"><p class="text-white bg-warning status btn-sm textCenter" style="width: 6rem;">{{form.state}}</p></td>
+                {% endif %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 
-    <table class="table">
-        <tr class="headtable">
-            <td>เครื่องจักร</td>
-            <td>วันเวลา</td>
-            <td>รายละเอียด</td>
-            <td>สถานะ</td>
-        </tr>
-        {% for form in formset %}
-        <tr>
-            <td>{{form.machine}}</td>
-            <td>{{form.datetime}}</td>
-            <td>{{form.desc}}</td>
-            {% if user.groups.all.0.name == "engineer" %}
-                {% if form.state == 'Succeed'%}
-                <td><a class="btn btn-success status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
-                {% elif form.state == 'Pending'%}
-                <td><a class="btn btn-secondary status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
-                {% elif form.state == 'Inprogress'%}
-                <td><a class="btn btn-warning status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
-                {% endif %}
-            {% else %}
-                {% if form.state == 'Succeed'%}
-                <td><p class="text-white bg-success status btn-sm textCenter" style="width: 6rem;">{{form.state}}</p></td>
-                {% elif form.state == 'Pending'%}
-                <td><p class="text-white bg-secondary status btn-sm textCenter" style="width: 6rem;">{{form.state}}</p></td>
-                {% elif form.state == 'Inprogress'%}
-                <td><p class="text-white bg-warning status btn-sm textCenter" style="width: 6rem;">{{form.state}}</p></td>
-                {% endif %}
-            {% endif %}
-        </tr>
-        {% endfor %}
-        <!--        {% for form in formset %}-->
-        <!--            <tr>-->
-        <!--                <td>{{ form.type.value }}</td>-->
-        <!--                <td>{{ form.reason.value }}</td>-->
-        <!--                <td>{{ form.date_start.value }}</td>-->
-        <!--                <td>{{ form.date_end.value }}</td>-->
-        <!--                {% if form.approve_status.value == "อนุมัติ" %}-->
-        <!--                    <td><button type="button" class="btn btn-success status btn-sm">{{ form.approve_status.value }}</button></td>-->
-        <!--                    {% elif form.approve_status.value == "รอการอนุมัติ" %}-->
-        <!--                    <td><button type="button" class="btn btn-secondary status btn-sm">{{ form.approve_status.value }}</button></td>-->
-        <!--                    {% elif form.approve_status.value == "ไม่อนุมัติ" %}-->
-        <!--                    <td><button type="button" class="btn btn-danger status btn-sm">{{ form.approve_status.value }}</button></td>-->
-        <!--                {% endif %}-->
-        <!--        {#            <td>{{ form.approve_status.value }}</td>#}-->
-        <!--            </tr>-->
-        <!--        {% endfor %}-->
-    </table>
-    <button type="button"><a href="{% url 'logout' %}">logout</a></button>
-
+    <div class="border border-danger rounded-pill">
+        <label>เก็บไว้ก่อนค่อยคิด</label>
+        {{ user.groups.all.0}}
+        {% if user.groups.all.0.name == "supervisors" %}
+        <button type="button"><a href="{% url 'register' %}">สมัครสมาชิค</a></button>
+        {% endif %}
+        <button type="button"><a href="{% url 'reportform' %}">แจ้งซ่อม</a></button>
+        <button type="button"><a href="{% url 'logout' %}">logout</a></button>
+    </div>
 </div>
-<!--<h1>{{ page_title }}</h1>-->
-<!--<table>-->
-<!--    <tr>-->
-<!--        <td>เครื่องจักร</td>-->
-<!--        <td>วันเวลา</td>-->
-<!--        <td>รายละเอียด</td>-->
-<!--        <td>สถานะ</td>-->
-<!--    </tr>-->
-<!--    {% for form in formset %}-->
-<!--    <tr>-->
-<!--        <td>{{form.machine}}</td>-->
-<!--        <td>{{form.datetime}}</td>-->
-<!--        <td>{{form.desc}}</td>-->
-<!--        {% if user.groups.all.0.name == "engineer" %}-->
-<!--        <td><button type="button"><a href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></button></td>-->
-<!--        {% else %}-->
-<!--        <td><button type="button">{{form.state}}</button></td>-->
-<!--        {% endif %}-->
-<!--    </tr>-->
-<!--    {% endfor %}-->
-
-<!--</table>-->
-<!--{{ user.groups.all.0}}-->
-<!--{% if user.groups.all.0.name == "supervisors" %}-->
-<!--<button type="button"><a href="{% url 'register' %}">สมัครสมาชิค</a></button>-->
-<!--{% endif %}-->
-<!--<button type="button"><a href="{% url 'reportform' %}">แจ้งซ่อม</a></button>-->
-<!--<button type="button"><a href="{% url 'logout' %}">logout</a></button>-->
-<!--    <img src="{% static 'images/test.png' %}" style="width:20%">-->
-<!--    <img src="{% static 'reports/images/test2.png' %}" style="width:20%">-->
-</body>
-</html>
+{% endblock %}

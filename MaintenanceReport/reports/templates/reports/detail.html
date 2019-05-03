@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "reports/base_template.html" %}
 
-<form method="post">
-    {{ formset.management_form }}
-    {% csrf_token %}
-    <!--{{formset.as_p}}-->
-    {% for form in formset %}
+{% load static %}
+{% block stylepage %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="post">
+        {{ formset.management_form }}
+        {% csrf_token %}
+        <!--{{formset.as_p}}-->
+        {% for form in formset %}
         <p><label id="{{form.id.id_for_label}}">ID REPORT: </label>{{form.id}}</p>
         <p><label id="{{form.machine.id_for_label}}">MACHINE: </label>{{form.machine}}</p>
         <p><label id="{{form.datetime.id_for_label}}">DATETIME: </label>{{form.datetime}}</p>
         <p><label id="{{form.desc.id_for_label}}">DESCRIPTION: </label><br>{{form.desc}}</p>
         <p><label id="{{form.state.id_for_label}}">STATE: </label>{{form.state}}</p>
-    {% endfor %}
-    <input type="submit" value="UPDATE">
-</form>
-</body>
-</html>
+        {% endfor %}
+        <input type="submit" value="UPDATE">
+    </form>
+</div>
+
+{% endblock %}
