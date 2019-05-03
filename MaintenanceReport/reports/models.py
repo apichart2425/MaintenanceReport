@@ -55,13 +55,22 @@ class Maintenance(models.Model):
 
 
 class Part(models.Model):
-    part_id = models.AutoField(primary_key=True)
     part_name = models.CharField(max_length=255)
     # category = models.TextField
     cost = models.DecimalField(max_digits=8, decimal_places=2)
     part_desc = models.CharField(max_length=255)
     stock = models.IntegerField()
     minimum_stock = models.IntegerField()
+
+class Category(models.Model):
+    c_code = models.CharField(max_length=255)
+    c_name = models.CharField(max_length=255)
+
+class Category_Part(models.Model):
+    p = models.ForeignKey(Part, on_delete=models.CASCADE)
+    c = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+
 
 class Machine_Part(models.Model):
     part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True)

@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import Maintenance
+from .models import Maintenance, Category, Category_Part, Part
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
 
@@ -144,3 +144,26 @@ def detail(request, maintenance_id):
 def my_logout(request):
     logout(request)
     return  redirect('login')
+
+def stock_list(request):
+    data_stock = []
+    object_list = Category.objects.all()
+    for stock in object_list:
+        category_part = Category_Part.objects.filter(c=stock.id)
+        for part_list in category_part:
+            part = Part.objects.filter(id=part_list.p_id)
+            for detail in part:
+                data_stock.append({
+                    'c_id': stock.c_name,
+                    'p_id': part_list.p_id,
+                    'part_name': detail.part_name,
+                    'cost': detail.part_desc,
+                    'stock': detail.stock,
+                    'minimum_stock': detail.minimum_stock
+                })
+    context = {
+        'stock_part': data_stock,
+        'stock_list': object_list
+    }
+
+    return render(request, template_name='reports/stockpick.html', context=context)
