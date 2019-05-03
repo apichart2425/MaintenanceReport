@@ -4,11 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms import formset_factory
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, render_to_response
 
 # Create your views here.
-from .models import Maintenance, Category, Category_Part, Part
+from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
 
@@ -145,25 +145,122 @@ def my_logout(request):
     logout(request)
     return  redirect('login')
 
-def stock_list(request):
+def stock_list(request, category_id, machine_id):
     data_stock = []
-    object_list = Category.objects.all()
+    object_list = Category.objects.filter(id=category_id)
     for stock in object_list:
         category_part = Category_Part.objects.filter(c=stock.id)
         for part_list in category_part:
             part = Part.objects.filter(id=part_list.p_id)
             for detail in part:
                 data_stock.append({
-                    'c_id': stock.c_name,
+                    'c_name': stock.c_name,
                     'p_id': part_list.p_id,
                     'part_name': detail.part_name,
-                    'cost': detail.part_desc,
+                    'cost': detail.cost,
+                    'part_desc': detail.part_desc,
                     'stock': detail.stock,
                     'minimum_stock': detail.minimum_stock
                 })
     context = {
         'stock_part': data_stock,
-        'stock_list': object_list
+        'stock_list': object_list,
+        'category_id': category_id,
+        'machine_id': machine_id
     }
 
     return render(request, template_name='reports/stockpick.html', context=context)
+
+def addtocart(request, part_id, machine_id):
+    part = Part.objects.get(id=part_id)
+    part_stock = part.stock
+    if part_stock > 0:
+        part.stock = part_stock-1
+        try:
+            cart = Cart.objects.get(part_id=part_id, for_machine_id=machine_id)
+            print(cart)
+            cart.quantity = cart.quantity+1
+            cart.save()
+
+        except Cart.DoesNotExist:
+            print("NONONO")
+            Cart.objects.create(
+                employee_id=request.user.id,
+                part_id=part_id,
+                quantity=1,
+                for_machine_id=machine_id
+            )
+    else:
+        print('OUT OF STOCK')
+    part.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    # return redirect('stockpick')
+
+def cart(request, category_id, machine_id):
+    data = []
+    cart = Cart.objects.filter(employee_id=request.user.id)
+    for item in cart:
+        part = Part.objects.get(pk=item.part_id)
+        machine = Machine.objects.get(pk=item.for_machine_id)
+        data.append({
+            'quantity':item.quantity,
+            'employee_id':request.user.id,
+            'part_id':item.part_id,
+            'part_name':part.part_name,
+            'cost':part.cost,
+            'for_machine_name': machine.mac_name,
+            'for_machine_id': item.for_machine_id
+        })
+    if request.method == 'POST':
+        cart_list = Cart.objects.filter(employee_id=request.user.id)
+        for item in cart_list:
+            Order.objects.create(
+                quantity=item.quantity,
+                datetime=datetime.datetime.today(),
+                employee_id=request.user.id,
+                part_id=item.part_id,
+                for_machine_id=item.for_machine_id
+            )
+        cart_list.delete()
+        return redirect('index')
+
+    context = {
+        'item_list': data,
+        'category_id': category_id,
+        'machine_id': machine_id
+    }
+    return render(request, template_name='reports/cart.html', context=context)
+
+def deleteitem(request, part_id, for_machine_id):
+    cart = Cart.objects.get(part_id=part_id, for_machine_id=for_machine_id)
+    part = Part.objects.get(id=part_id)
+    part.stock = part.stock+cart.quantity
+    part.save()
+    cart.delete()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return redirect('cart')
+
+def selectcategory(request, machine_id):
+    data = []
+    machine = Machine_Category.objects.filter(machine_id=machine_id)
+    for category_list in machine:
+        category = Category.objects.filter(id=category_list.category_id)
+        for item in category:
+            data.append({
+                'id': item.id,
+                'c_code': item.c_code,
+                'c_name': item.c_name
+            })
+    context = {
+        'category': data,
+        'machine_id': machine_id
+    }
+    return render(request, template_name='reports/selectcategory.html', context=context)
+
+def selectmachine(request):
+    machine = Machine.objects.all()
+    context = {
+        'machine_list': machine
+    }
+    return render(request, template_name='reports/selectmachine.html', context=context)
