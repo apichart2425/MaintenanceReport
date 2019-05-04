@@ -54,6 +54,7 @@ class Maintenance(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
 
 
+
 class Part(models.Model):
     part_name = models.CharField(max_length=255)
     # category = models.TextField

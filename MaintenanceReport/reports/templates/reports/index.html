@@ -33,7 +33,8 @@
                 <tr class="headtable row">
                     <th class="col-2">เครื่องจักร</th>
                     <th class="col-2">วันเวลา</th>
-                    <th class="col-6">รายละเอียด</th>
+                    <th class="col-2">ผู้แจ้ง</th>
+                    <th class="col-4">รายละเอียด</th>
                     <th class="col-2">สถานะ</th>
                 </tr>
             </thead>
@@ -41,7 +42,8 @@
             <tr class="row">
                 <td class="col-2">{{form.machine}}</td>
                 <td class="col-2">{{form.datetime}}</td>
-                <td class="col-6">{{form.desc}}</td>
+                <td class="col-2">{{form.emp_name}}</td>
+                <td class="col-4">{{form.desc}}</td>
                 {% if user.groups.all.0.name == "engineer" %}
                 {% if form.state == 'Succeed'%}
                 <td class="col-2"><a class="btn btn-success status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>

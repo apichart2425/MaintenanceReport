@@ -24,9 +24,15 @@ class RegisterModelForm(forms.ModelForm):
 
 
 class ReportModelForm(forms.ModelForm):
+
     class Meta:
         model = Maintenance
-        exclude = ['id', 'datetime', 'state', 'employee']
+        exclude = ['id', 'datetime', 'state', 'employee','emp_fname']
+        fields = ['machine', 'desc']
+        widgets = {
+            'machine': forms.Select(attrs={'class': 'form-control'}),
+            'desc':  forms.Textarea(attrs={'class': 'form-control'}),
+        }
         # fields = '__all__'
 
 
