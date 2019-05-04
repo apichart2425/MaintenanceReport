@@ -56,7 +56,7 @@ class Maintenance(models.Model):
 
 
 class Part(models.Model):
-    part_name = models.CharField(max_length=255)
+    part_code = models.CharField(max_length=255)
     # category = models.TextField
     cost = models.DecimalField(max_digits=8, decimal_places=2)
     part_desc = models.CharField(max_length=255)
@@ -64,7 +64,7 @@ class Part(models.Model):
     minimum_stock = models.IntegerField()
 
     def __str__(self):
-        return self.part_name
+        return self.part_code
 
 class Category(models.Model):
     c_code = models.CharField(max_length=255)
