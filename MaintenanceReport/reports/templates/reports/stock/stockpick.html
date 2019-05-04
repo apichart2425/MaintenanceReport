@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" >
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+{% extends "reports/base_template.html" %}
 
-<body>
+{% block stylepage %}
+<style>
+    .isit{
+        text-align: center;
+    }
+</style>
+{% endblock %}
 
+{% block content %}
 <table>
     <tr>
         <th>ชื่ออุปกรณ์</th>
@@ -39,6 +39,4 @@
 <a href="{% url 'selectcategory' machine_id %}">กลับ</a>
 
 
-  </body>
-
-</html>
+{% endblock %}

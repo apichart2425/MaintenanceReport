@@ -30,6 +30,7 @@
             return i;
         }
     </script>
+
     {% block stylepage %}
     {% endblock %}
 
@@ -45,32 +46,42 @@
 
 
 {% if title != "เข้าสู่ระบบ" %}
-<nav class="navbar navbar-light  navbar-expand-lg" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#">
+<!--style="background-color: #e3f2fd;"-->
+<nav class="navbar navbar-light  navbar-expand-lg bg-info text-light" >
+    <a class="navbar-brand text-light" href="#">
         <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         Bootstrap
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse text-light" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a  class="nav-link"href="{% url 'index' %}">รายการแจ้งซ่อม</a>
+            <li class="nav-item text-light">
+                <a  class="nav-link text-light"href="{% url 'index' %}">รายการแจ้งซ่อม</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link"href="{% url 'reportform' %}">แจ้งซ่อม</a>
+                <a  class="nav-link text-light"href="{% url 'reportform' %}">แจ้งซ่อม</a>
             </li>
+            {% if user.groups.all.0.name == "supervisors" %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">สมัครสมาชิก</a>
+                <a class="nav-link text-light" href="{% url 'register' %}">สมัครสมาชิก</a>
             </li>
+            {% endif %}
+            {% if user.groups.all.0.name == "engineer" %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'selectmachine' %}">stock</a>
+            </li>
+            {% endif %}
         </ul>
 
         <div class="dropdown mr-1">
-            <span type="text" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <a class="btn bg-info dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span id="txt"></span>
-            </span>
+            </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+
                 <span class="navbar-text dropdown-item">
                     <a href="{% url 'logout' %}">logout</a>
                 </span>

@@ -177,7 +177,7 @@ def stock_list(request, category_id, machine_id):
         'machine_id': machine_id
     }
 
-    return render(request, template_name='reports/stockpick.html', context=context)
+    return render(request, template_name='reports/stock/stockpick.html', context=context)
 
 def addtocart(request, part_id, machine_id):
     part = Part.objects.get(id=part_id)
@@ -237,7 +237,7 @@ def cart(request, category_id, machine_id):
         'category_id': category_id,
         'machine_id': machine_id
     }
-    return render(request, template_name='reports/cart.html', context=context)
+    return render(request, template_name='reports/stock/cart.html', context=context)
 
 def deleteitem(request, part_id, for_machine_id):
     cart = Cart.objects.get(part_id=part_id, for_machine_id=for_machine_id)
@@ -252,8 +252,11 @@ def deleteitem(request, part_id, for_machine_id):
 def selectcategory(request, machine_id):
     data = []
     machine = Machine_Category.objects.filter(machine_id=machine_id)
+    print(machine)
     for category_list in machine:
         category = Category.objects.filter(id=category_list.category_id)
+        machine_name = Machine.objects.get(pk=machine_id)
+        title = "อะไหล่อุปกรณ์ " + str(machine_name)
         for item in category:
             data.append({
                 'id': item.id,
@@ -261,14 +264,17 @@ def selectcategory(request, machine_id):
                 'c_name': item.c_name
             })
     context = {
+        'title': title,
         'category': data,
         'machine_id': machine_id
     }
-    return render(request, template_name='reports/selectcategory.html', context=context)
+    print("name %s" %title)
+    return render(request, template_name='reports/stock/selectcategory.html', context=context)
 
 def selectmachine(request):
     machine = Machine.objects.all()
     context = {
+        'title': "รายการเครื่องจักรทอผ้า",
         'machine_list': machine
     }
-    return render(request, template_name='reports/selectmachine.html', context=context)
+    return render(request, template_name='reports/stock/selectmachine.html', context=context)

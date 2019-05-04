@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cart</title>
-</head>
-<body>
+{% extends "reports/base_template.html" %}
+
+{% load static %}
+
+{% block stylepage %}
+<style>
+    .isit{
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
     <form method="post">
         {% csrf_token %}
         <table>
@@ -28,6 +34,4 @@
     </form>
     <a href="{% url 'stockpick' category_id machine_id %}">กลับ</a>
 
-
-</body>
-</html>
+{% endblock %}

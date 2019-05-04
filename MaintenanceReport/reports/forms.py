@@ -41,5 +41,5 @@ class ReportForm(forms.Form):
     id = forms.IntegerField()
     machine = forms.CharField(max_length=255)
     datetime = forms.DateTimeField()
-    desc = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}))
+    desc = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'class': 'form-control'}))
     state = forms.ChoiceField(choices=CHOICES)
