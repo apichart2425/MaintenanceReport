@@ -5,22 +5,48 @@
     .isit{
         text-align: center;
     }
+    .imgSize{
+        max-width: 100%;
+        max-height: 50%;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>รหัสอุปกรณ์</th>
-            <th>ชื่ออุปกรณ์</th>
-        </tr>
+<div class="container my-3">
+    <h1 class="" style="text-align: center">ชุดอุปกรณ์</h1>
+    <div class="row my-5 ml-2">
         {% for category_item in category %}
-        <tr>
-            <td>{{category_item.c_code}}</td>
-            <td>{{category_item.c_name}}</td>
-            <td><a href="{% url 'stockpick' category_item.id machine_id %}">เลือก</a></td>
-        </tr>
+        <div class="card-deck col-4 my-2" style="position: relative">
+                <div class="card  mx-3">
+                    <img src="https://resources.matcha-jp.com/archive_files/jp/2016/07/hakataori_20160715e.jpg"  class="card-img-top imgSize" style="" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{category_item.c_name}}</h5>
+                        <p class="card-text"><b>รหัสชุดอุปกรณ์ : {{category_item.c_code}} </b></p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted"><a href="{% url 'stockpick' category_item.id machine_id %}">เลือก</a></small>
+                    </div>
+                </div>
+        </div>
             {% endfor %}
-    </table>
+
+        <!--        <table>-->
+        <!--            <tr>-->
+        <!--                <th>รหัสอุปกรณ์</th>-->
+        <!--                <th>ชื่ออุปกรณ์</th>-->
+        <!--            </tr>-->
+        <!--            {% for category_item in category %}-->
+<!--            <tr>-->
+<!--                <td>{{category_item.c_code}}</td>-->
+<!--                <td>{{category_item.c_name}}</td>-->
+<!--                <td><a href="{% url 'stockpick' category_item.id machine_id %}">เลือก</a></td>-->
+<!--            </tr>-->
+<!--            {% endfor %}-->
+<!--        </table>-->
+    </div>
     <a href="{% url 'selectmachine' %}">กลับ</a>
+</div>
+
+
 {% endblock %}

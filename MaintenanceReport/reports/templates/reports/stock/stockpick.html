@@ -5,38 +5,70 @@
     .isit{
         text-align: center;
     }
+    .red{
+        color: red;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<table>
-    <tr>
-        <th>ชื่ออุปกรณ์</th>
-        <th>หมายเลขชิ้นส่วน</th>
-        <th>ชื่อชิ้นส่วน</th>
-        <th>ราคา</th>
-        <th>คำอธิบาย</th>
-        <th>จำนวนที่มีในคลัง</th>
-        <th>minimum</th>
+<div class="container my-3">
 
-    </tr>
     {% for stock in stock_part %}
-    <tr>
-        <td>{{stock.c_name}}</td>
-        <td>{{stock.p_id}}</td>
-        <td>{{stock.part_code}}</td>
-        <td>{{stock.cost}}</td>
-        <td>{{stock.part_desc}}</td>
-        <td>{{stock.stock}}</td>
-        <td>{{stock.minimum_stock}}</td>
-        <td><a href="{% url 'addtocart' stock.p_id machine_id %}"> add </a></td>
-    </tr>
+    {% if forloop.counter == 1 %}
+    <h1 style="text-align: center">ชื่อชิ้นส่วนอุปกรณ์ : {{stock.c_name}}</h1>
+    {% endif %}
     {% endfor %}
-</table>
+    <div class="row my-3">
+        <div class="col-2">
+            <a class="btn btn-secondary" href="{% url 'selectcategory' machine_id %}">ย้อนกลับ</a>
+        </div>
+        <div class="col-8"></div>
+        <div class="col-2 ">
+            <img src="https://image.flaticon.com/icons/svg/126/126083.svg" alt="" style="width: 30px">
+            <a class="btn btn-success left" href="{% url 'cart' category_id machine_id %}">ตะกร้าอุปกรณ์</a>
+        </div>
+    </div>
+     {% for stock in stock_part %}
+    <div class="mb-3">
+        <div class="border border-success rounded-lg py-3 px-3 ">
+            <div class="row">
+                <div class="col-10">
+                    <label>ชื่อชิ้นส่วน ({{stock.p_id}}) :</label>
+                    {{stock.part_desc}}
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
+                </div>
+            </div>
+            <div>
+                <label>หมายเลขชิ้นส่วนอุปกรณ์ :  {{stock.part_code}}</label>
+            </div>
 
-<a href="{% url 'cart' category_id machine_id %}">cart</a>
-<a href="{% url 'index' %}">index</a>
-<a href="{% url 'selectcategory' machine_id %}">กลับ</a>
+            <div class="row">
+                <div class="col-6">
+                    {% if stock.stock <= stock.minimum_stock %}
+                    <div class="red">
+                        <label>จำนวนอุปกรณ์ที่มีในคลัง :</label> {{stock.stock}} <label> ชิ้น </label>
+                        <b><label> ** จำนวนอุปกรณ์ขั้นต่ำที่ควรมี :  </label> {{stock.minimum_stock}} <label> ชิ้น ** </label></b>
+                    </div>
+                    {% else %}
+                    <div>
+                        <label>จำนวนอุปกรณ์ที่มีในคลัง :  </label>{{stock.stock}} <label> ชิ้น </label>
+                    </div>
+                    {% endif %}
 
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>ราคาต่อชิ้น : </label>
+                    {{stock.cost}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </table>
+</div>
 {% endblock %}
