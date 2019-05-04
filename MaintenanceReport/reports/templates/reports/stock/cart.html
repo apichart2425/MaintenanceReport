@@ -11,27 +11,61 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
+    <h1>สรุปยอดายการเบิกอุปกรณื</h1>
     <form method="post">
+    <div class="row my-3">
+        <div class="col-2">
+            <a class="btn btn-secondary" href="{% url 'selectcategory' machine_id %}">ย้อนกลับ</a>
+        </div>
+        <div class="col-8"></div>
+        <div class="col-2 ">
+<!--            <img src="https://image.flaticon.com/icons/svg/126/126083.svg" alt="" style="width: 30px">-->
+           <input type="submit" class="btn btn-success" value="ยืนยันการเเบิกอุปกรณ์">
+        </div>
+    </div>
         {% csrf_token %}
-        <table>
-            <tr>
-                <th>ชื่ออะไหล่</th>
-                <th>ราคา</th>
-                <th>จำนวน</th>
-                <th>สำหรับเครื่องจักร</th>
-            </tr>
+        <div class="border border-primary rounded p-3 my-3 px-5 py-3">
+
+<!--            {{forloop.counter}}-->
+
+            <div class="row">
+                {% for item in item_list %}
+                {% if forloop.counter == 1 %}
+                <div class="col-10">
+                    <label>เครื่องจักร : {{ item.for_machine_name }}</label>
+                </div>
+                {% endif %}
+                {% if forloop.counter == item_list|length  %}
+                <div class="col-2">
+                    <label>ยอดรวม : {{ item.total_cost }}  ฿</label>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        <table class="table table-hover">
+            <thead>
+                <tr class="headtable row">
+                    <th class="col-3">รหัสชิ้นส่วนอะไหล่</th>
+                    <th class="col-3">จำนวน</th>
+                    <th class="col-3">ราคาบาทต่อชิ้น</th>
+                    <th class="col-3">ราคารวม</th>
+                </tr>
+            </thead>
             {% for item in item_list %}
-            <tr>
-                <td>{{ item.part_name}}</td>
-                <td>{{ item.cost}}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.for_machine_name}}</td>
-                <td><a href="{% url 'deleteitem' item.part_id item.for_machine_id %}">delete</a></td>
+            <tr class="row">
+                <td class="col-3">{{item.part_code}}</td>
+                <td class="col-3">{{item.quantity}} ชิ้น</td>
+                <td class="col-3">{{item.cost_one}} ฿</td>
+                <td class="col-3">{{item.cost_total}} ฿</td>
             </tr>
             {% endfor %}
         </table>
-        <input type="submit" value="ดำเนินการต่อ">
-    </form>
-    <a href="{% url 'stockpick' category_id machine_id %}">กลับ</a>
+    </div>
+        {% for item in item_list %}
+        <p>{{item}}</p>
+        {% endfor %}
 
+    </form>
+</div>
 {% endblock %}

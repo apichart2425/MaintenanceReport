@@ -38,7 +38,12 @@
                     {{stock.part_desc}}
                 </div>
                 <div class="col-2">
-                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
+<!--                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>-->
+                    {% if stock.stock <= stock.minimum_stock %}
+                    <button class="btn btn-secondary  " href="{% url 'addtocart' stock.p_id machine_id %}" disabled> เพิ่มลงตะกร้า </button>
+                    {% else %}
+                     <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
+                    {% endif %}
                 </div>
             </div>
             <div>

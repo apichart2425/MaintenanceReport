@@ -205,16 +205,21 @@ def addtocart(request, part_id, machine_id):
 
 def cart(request, category_id, machine_id):
     data = []
+    total_cost = 0
     cart = Cart.objects.filter(employee_id=request.user.id)
     for item in cart:
         part = Part.objects.get(pk=item.part_id)
         machine = Machine.objects.get(pk=item.for_machine_id)
+        total_cost = total_cost + (int(part.cost)*item.quantity)
+        print(total_cost)
         data.append({
             'quantity':item.quantity,
             'employee_id':request.user.id,
             'part_id':item.part_id,
             'part_code':part.part_code,
-            'cost':part.cost,
+            'cost_one':part.cost,
+            'cost_total': int(part.cost)*item.quantity,
+            'total_cost': total_cost,
             'for_machine_name': machine.mac_name,
             'for_machine_id': item.for_machine_id
         })
