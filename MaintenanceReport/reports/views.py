@@ -7,9 +7,8 @@ from django.forms import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
 
-# Create your views here.
-from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine
-from .forms import RegisterModelForm, ReportModelForm, ReportForm, CategoryModelForm, MachineModelForm
+from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
+from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
 
 @login_required
@@ -19,13 +18,19 @@ def index(request):
     print(request.user)
     test = Maintenance.objects
     for detail in test.all():
+        emp = Employee.objects.get(pk = detail.employee_id)
+        emp_fname = emp.emp_fname
+        emp_lname = emp.emp_lname
+        emp_name = emp_fname + " " + emp_lname
+        print("name is %s" %(emp_name))
         data.append(
             {
                 'id': detail.id,
                 'machine': detail.machine,
                 'datetime': detail.datetime,
                 'state': detail.state,
-                'desc': detail.desc
+                'desc': detail.desc,
+                'emp_name' : emp_name
             }
         )
     # MaintenanceFormSet = formset_factory(ReportModelForm, max_num=len(data))
@@ -100,6 +105,7 @@ def my_register(request):
 def report_form(request):
     if request.method == 'POST':
         form = ReportModelForm(request.POST)
+        # name =
         if form.is_valid():
             print("test")
             check = form.save(commit=False)
@@ -118,12 +124,13 @@ def report_form(request):
 def detail(request, maintenance_id):
     context = {'title': "รายละเอียดการแจ้งซ่อม",}
     detail = Maintenance.objects.get(pk=maintenance_id)
+
     data = [{
                 'id': detail.id,
                 'machine': detail.machine,
                 'datetime': detail.datetime,
                 'state': detail.state,
-                'desc': detail.desc
+                'desc': detail.desc,
             }]
     ReportFormSet = formset_factory(ReportForm, max_num=len(data))
     if request.method == 'POST':

@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ReportForm</title>
-</head>
-<body>
-    <h1>แจ้งซ่อมเครื่องจักร</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <p>
-        <label>ชื่อเครื่องจักร</label><br>
-        {{form.machine}}
-        </p>
-        <p>
-        <p>
-        <label>รายละเอียดอาการของเครื่องที่เสีย</label><br>
-        {{form.desc}}
-        </p>
-        <!--{{form}}-->
-        <input type="submit" value="แจ้ง">
-    </form>
-</body>
-</html>
+{% extends "reports/base_template.html" %}
+
+{% block stylepage %}
+<style></style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 style="text-align: center">แจ้งซ่อมเครื่องจักรทอผ้า</h1>
+    <div>
+        <form method="POST" class="border border-primary rounded p-3 my-3 px-5 py-3">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>ชื่อเครื่องจักร</label>
+                <p>{{form.machine}}</p>
+            </div>
+            <div class="form-group">
+                <label>รายละเอียดของการแจ้งซ่อมอุปกรณ์</label>
+                <p>{{form.desc}}</p>
+            </div>
+<!--            {{form}}-->
+            <input class="btn btn-primary" type="submit" value="ยืนยันการแจ้งซ่อมอุปกรณ์">
+        </form>
+    </div>
+</div>
+{% endblock %}
