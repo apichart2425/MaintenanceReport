@@ -14,5 +14,7 @@ urlpatterns = [
     path('cart/<int:category_id>/<int:machine_id>', views.cart, name='cart'),
     path('deleteitem/<int:part_id>/<int:for_machine_id>', views.deleteitem, name='deleteitem'),
     path('selectcategory/<int:machine_id>', views.selectcategory, name='selectcategory'),
-    path('selectmachine/', views.selectmachine, name='selectmachine')
+    path('selectmachine/', views.selectmachine, name='selectmachine'),
+    path('addmachine/', views.addmachine, name='addmachine'),
+    path('managemachine/', views.managemachine, name='managemachine')
 ]

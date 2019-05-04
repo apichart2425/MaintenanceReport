@@ -62,17 +62,27 @@ class Part(models.Model):
     stock = models.IntegerField()
     minimum_stock = models.IntegerField()
 
+    def __str__(self):
+        return self.part_name
+
 class Category(models.Model):
     c_code = models.CharField(max_length=255)
     c_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.c_name
 
 class Category_Part(models.Model):
     p = models.ForeignKey(Part, on_delete=models.CASCADE)
     c = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+
 class Machine_Category(models.Model):
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.category.c_name
 
 class Machine_Part(models.Model):
     part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True)

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Employee, Maintenance
+from .models import Employee, Maintenance, Machine, Category
 
 
 class RegisterModelForm(forms.ModelForm):
@@ -27,3 +27,14 @@ class ReportForm(forms.Form):
     datetime = forms.DateTimeField()
     desc = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}))
     state = forms.ChoiceField(choices=CHOICES)
+
+
+class MachineModelForm(forms.ModelForm):
+    class Meta:
+        model = Machine
+        fields = '__all__'
+
+class CategoryModelForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = '__all__'
