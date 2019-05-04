@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d012afa-62bf-4331-921c-fbbb4b23ba6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/selectcategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/selectcategory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/stockpick.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/stockpick.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/reports/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reports/templates/reports/stock/cart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            <state relative-caret-position="159">
+              <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -220,18 +216,17 @@
       <workItem from="1556862005765" duration="2868000" />
       <workItem from="1556868592227" duration="7048000" />
       <workItem from="1556895508117" duration="26587000" />
-      <workItem from="1556968075429" duration="15186000" />
+      <workItem from="1556968075429" duration="15434000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61903000" />
+    <option name="totallyTimeSpent" value="62151000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15817694" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15817694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -242,7 +237,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.30410182" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32956153" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -444,8 +439,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reports/templates/reports/stock/cart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="159">
+          <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
         </state>
       </provider>
     </entry>
