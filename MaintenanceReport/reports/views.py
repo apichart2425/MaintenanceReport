@@ -7,7 +7,6 @@ from django.forms import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
 
-# Create your views here.
 from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
 
@@ -164,7 +163,7 @@ def stock_list(request, category_id, machine_id):
                 data_stock.append({
                     'c_name': stock.c_name,
                     'p_id': part_list.p_id,
-                    'part_name': detail.part_name,
+                    'part_code': detail.part_code,
                     'cost': detail.cost,
                     'part_desc': detail.part_desc,
                     'stock': detail.stock,
@@ -214,7 +213,7 @@ def cart(request, category_id, machine_id):
             'quantity':item.quantity,
             'employee_id':request.user.id,
             'part_id':item.part_id,
-            'part_name':part.part_name,
+            'part_code':part.part_code,
             'cost':part.cost,
             'for_machine_name': machine.mac_name,
             'for_machine_id': item.for_machine_id
@@ -278,3 +277,54 @@ def selectmachine(request):
         'machine_list': machine
     }
     return render(request, template_name='reports/stock/selectmachine.html', context=context)
+
+
+def addmachine(request):
+    context = {}
+    CategoryFormSet = formset_factory(CategoryModelForm, extra=3)
+
+    if request.method == 'POST':
+        form = MachineModelForm(request.POST)
+        formset = CategoryFormSet(request.POST)
+        if form.is_valid():
+            machine = form.save()
+            if formset.is_valid():
+                for category_form in formset:
+                    try:
+                        if category_form.cleaned_data.get('c_code'):
+                            check = Category.objects.get(c_code=category_form.cleaned_data.get('c_code'))
+                            Machine_Category.objects.create(
+                                category_id=check.id,
+                                machine_id=machine.mac_id
+                            )
+                    except Category.DoesNotExist:
+                        if category_form.cleaned_data.get('c_code'):
+                            check = Category.objects.create(
+                                c_code=category_form.cleaned_data.get('c_code'),
+                                c_name=category_form.cleaned_data.get('c_name')
+                            )
+                            Machine_Category.objects.create(
+                                category_id=check.id,
+                                machine_id=machine.mac_id
+                            )
+                return redirect('managemachine')
+    else:
+        form = MachineModelForm()
+        formset = CategoryFormSet()
+
+    context['form'] = form
+    context['formset'] = formset
+
+    return render(request, template_name='reports/addmachine.html', context=context)
+
+
+def managemachine(request):
+    machine = Machine.objects.all()
+    context = {
+        'machine_list': machine
+    }
+
+    return render(request, template_name='reports/managemachine.html', context=context)
+
+# def update(request, machine_id):
+#

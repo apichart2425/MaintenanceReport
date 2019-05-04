@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>เลือกเครื่องจักรที่ต้องการจัดการ</h1>
+    <table>
+        <tr>
+            <td>เครื่องจักร</td>
+        </tr>
+        {% for machine in machine_list %}
+        <tr>
+            <td>{{machine.mac_name}}</td>
+            <td><a href="{% url 'selectcategory' machine.mac_id %}">เลือก</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <a href="{% url 'index' %}">กลับหน้าหลัก</a>
+    <a href="{% url 'addmachine' %}">เพิ่มเครื่องจักร</a>
+</body>
+</html>
