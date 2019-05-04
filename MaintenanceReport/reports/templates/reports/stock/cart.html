@@ -16,7 +16,7 @@
     <form method="post">
     <div class="row my-3">
         <div class="col-2">
-            <a class="btn btn-secondary" href="{% url 'selectcategory' machine_id %}">ย้อนกลับ</a>
+            <a class="btn btn-secondary" href="{% url 'stockpick' category_id machine_id %}">ย้อนกลับ</a>
         </div>
         <div class="col-8"></div>
         <div class="col-2 ">
@@ -47,26 +47,29 @@
             <thead>
                 <tr class="headtable row">
                     <th class="col-3">รหัสชิ้นส่วนอะไหล่</th>
-                    <th class="col-3">จำนวน</th>
-                    <th class="col-3">ราคาบาทต่อชิ้น</th>
-                    <th class="col-3">ราคารวม</th>
+                    <th class="col-2">จำนวน</th>
+                    <th class="col-2">ราคาบาทต่อชิ้น</th>
+                    <th class="col-2">ราคารวม</th>
+                    <th class="col-2"> </th>
                 </tr>
             </thead>
             {% for item in item_list %}
             <tr class="row">
                 <td class="col-3">{{item.part_code}}</td>
-                <td class="col-3">{{item.quantity}} ชิ้น
+                <td class="col-2">{{item.quantity}} ชิ้น</td>
+                <td class="col-2">{{item.cost_one}} ฿</td>
+                <td class="col-2">{{item.cost_total}} ฿</td>
+                <td>
+                    <div class="border border-danger bg-danger rounded rounded-lg">
+                        <a class=" btn col-2 text-light" href="{% url 'deleteitem' item.part_id item.for_machine_id %}">
+                            Delete
+                        </a>
+                    </div>
                 </td>
-                <td class="col-3">{{item.cost_one}} ฿</td>
-                <td class="col-3">{{item.cost_total}} ฿</td>
             </tr>
             {% endfor %}
         </table>
     </div>
-        {% for item in item_list %}
-        <p>{{item}}</p>
-        {% endfor %}
-
     </form>
 </div>
 {% endblock %}

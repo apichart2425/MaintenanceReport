@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d012afa-62bf-4331-921c-fbbb4b23ba6d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/reports/templates/reports/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/templates/reports/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/templates/reports/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../data.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +24,15 @@
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reports/templates/reports/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -45,11 +58,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reports/templates/reports/base_template.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="35" column="46" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reports/templates/reports/stock/cart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+            <state relative-caret-position="171">
+              <caret line="18" column="91" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reports/templates/reports/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -93,15 +124,12 @@
       <list>
         <option value="$PROJECT_DIR$/MaintenanceReport/urls.py" />
         <option value="$PROJECT_DIR$/reports/templates/reports/reportengineer.html" />
-        <option value="$PROJECT_DIR$/reports/templates/reports/login.html" />
         <option value="$PROJECT_DIR$/reports/models.py" />
         <option value="$PROJECT_DIR$/reports/templates/reports/register.html" />
         <option value="$PROJECT_DIR$/reports/templates/reports/reportform.html" />
         <option value="$PROJECT_DIR$/reports/forms.py" />
         <option value="$PROJECT_DIR$/reports/templates/reports/detail.html" />
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/machine.html" />
-        <option value="$PROJECT_DIR$/reports/templates/reports/base_template.html" />
-        <option value="$PROJECT_DIR$/reports/templates/reports/index.html" />
         <option value="$PROJECT_DIR$/reports/admin.py" />
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/selectmachine.html" />
         <option value="$PROJECT_DIR$/reports/urls.py" />
@@ -110,6 +138,9 @@
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/stockpick.html" />
         <option value="$PROJECT_DIR$/reports/views.py" />
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" />
+        <option value="$PROJECT_DIR$/reports/templates/reports/base_template.html" />
+        <option value="$PROJECT_DIR$/reports/templates/reports/index.html" />
+        <option value="$PROJECT_DIR$/reports/templates/reports/login.html" />
       </list>
     </option>
   </component>
@@ -216,17 +247,18 @@
       <workItem from="1556862005765" duration="2868000" />
       <workItem from="1556868592227" duration="7048000" />
       <workItem from="1556895508117" duration="26587000" />
-      <workItem from="1556968075429" duration="15434000" />
+      <workItem from="1556968075429" duration="17308000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62151000" />
+    <option name="totallyTimeSpent" value="64025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15817694" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15817694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -237,7 +269,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.30410182" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32956153" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -305,16 +337,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reports/templates/reports/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="n#style#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reports/templates/reports/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -345,13 +367,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reports/templates/reports/base_template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="72" column="74" selection-start-line="72" selection-start-column="74" selection-end-line="72" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reports/templates/reports/addmachine.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -376,13 +391,6 @@
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reports/templates/reports/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="67" column="10" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="67" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -430,6 +438,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/reports/templates/reports/stock/cart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="18" column="91" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/reports/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="564">
@@ -437,10 +452,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reports/templates/reports/stock/cart.html">
+    <entry file="file://$PROJECT_DIR$/reports/templates/reports/base_template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+        <state relative-caret-position="323">
+          <caret line="35" column="46" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/templates/reports/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/templates/reports/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
