@@ -268,7 +268,8 @@ def selectcategory(request, machine_id):
             data.append({
                 'id': item.id,
                 'c_code': item.c_code,
-                'c_name': item.c_name
+                'c_name': item.c_name,
+                'image': item.image
             })
     context = {
         'title': title,

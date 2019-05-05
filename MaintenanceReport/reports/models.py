@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.safestring import mark_safe
+
+
 class Employee(models.Model):
 
     employee = models.OneToOneField('auth.User', on_delete=models.CASCADE, primary_key=True)
@@ -33,6 +36,12 @@ class Machine(models.Model):
     mac_name = models.CharField(max_length=255)
     mac_sum = models.CharField(max_length=255)
     mac_desc = models.TextField()
+    image = models.ImageField(upload_to='images/machine/', null=True)
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.image))
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
 
     def __str__(self):
         return self.mac_name
@@ -64,11 +73,17 @@ class Part(models.Model):
     minimum_stock = models.IntegerField()
 
     def __str__(self):
-        return self.part_code
+        return self.part_code+" : "+self.part_desc
 
 class Category(models.Model):
     c_code = models.CharField(max_length=255)
     c_name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images/', default='images/test2.png', null=True)
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.image))
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
 
     def __str__(self):
         return self.c_name
