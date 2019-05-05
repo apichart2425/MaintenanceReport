@@ -1,4 +1,7 @@
 import datetime
+import json
+from django.core import serializers
+
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -330,6 +333,34 @@ def managemachine(request):
     }
 
     return render(request, template_name='reports/managemachine.html', context=context)
+
+def graph(request):
+    data = []
+    x = {}
+    order = Order.objects.all()
+    for item in order:
+        machine = Machine.objects.get(pk=item.for_machine_id)
+        part = Part.objects.get(pk=item.part_id)
+        data.append({
+            'mac_name': machine.mac_name,
+            'part_code': part.part_code,
+            'part_desc': part.part_desc,
+            'quantity': item.quantity,
+            'part_cost': part.cost,
+        })
+
+    print(type(data))
+    # for items in data:
+    #     x.append({
+    #         'name': items.mac_name
+    #     })
+
+
+    context = {
+        'title': 'ยอดสรุปผลการซ่อม',
+        'data': data
+    }
+    return render(request, template_name='reports/graph.html', context=context)
 
 # def update(request, machine_id):
 #

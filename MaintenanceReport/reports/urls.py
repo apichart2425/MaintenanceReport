@@ -16,5 +16,6 @@ urlpatterns = [
     path('selectcategory/<int:machine_id>', views.selectcategory, name='selectcategory'),
     path('selectmachine/', views.selectmachine, name='selectmachine'),
     path('addmachine/', views.addmachine, name='addmachine'),
-    path('managemachine/', views.managemachine, name='managemachine')
+    path('managemachine/', views.managemachine, name='managemachine'),
+    path('graph/', views.graph, name='graph'),
 ]
