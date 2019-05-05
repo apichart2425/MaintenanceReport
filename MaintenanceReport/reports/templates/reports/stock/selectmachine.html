@@ -24,17 +24,16 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h5 class="card-title">{{machine.mac_name}}</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dignissimos esse, eum excepturi optio perferendis quasi repellendus repudiandae, sed sunt suscipit tempore ut. Aperiam architecto asperiores labore optio quod recusandae?</p>
-                    </div>
+                        <h5 class="card-title">รายชื่อเครื่อง : {{machine.mac_name}}</h5>
+                        <p class="card-text">คำอธบายเครื่อง : {{machine.mac_desc}}</p>
                         <div class="card-body">
                             <p class="card-text text-right"><a class="btn btn-primary" href="{% url 'selectcategory' machine.mac_id %}">เลือก</a></p>
                         </div>
                 </div>
             </div>
         </div>
+    </div>
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}

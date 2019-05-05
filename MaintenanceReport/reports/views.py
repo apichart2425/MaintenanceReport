@@ -348,14 +348,9 @@ def graph(request):
             'quantity': item.quantity,
             'part_cost': part.cost,
         })
+    # for i in data:
 
     print(type(data))
-    # for items in data:
-    #     x.append({
-    #         'name': items.mac_name
-    #     })
-
-
     context = {
         'title': 'ยอดสรุปผลการซ่อม',
         'data': data

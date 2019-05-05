@@ -3,6 +3,10 @@
 {% load static %}
 {% block stylepage %}
     <style>
+        #id_form-0-id,id_form-0-machine{
+            width: 150px;
+            height: 30px;
+        }
     </style>
 {% endblock %}
 
@@ -13,13 +17,15 @@
         {% csrf_token %}
         <!--{{formset.as_p}}-->
         {% for form in formset %}
-        <div class="form-group">
-            <label  id="{{form.id.id_for_label}}">ID REPORT:</label>
-            <p>{{form.id}}</p>
-        </div>
-         <div class="form-group">
-            <label id="{{form.machine.id_for_label}}">MACHINE: </label>
-            <p>{{form.machine}}</p>
+        <div class="form-group row">
+            <div class="col-4" disabled>
+                <label id="{{form.id.id_for_label}}">ID REPORT:</label>
+                <p>{{form.id}}</p>
+            </div>
+            <div class="col-4" disabled>
+                <label id="{{form.machine.id_for_label}}">MACHINE: </label>
+                <p>{{form.machine}}</p>
+            </div>
         </div>
         <div class="form-group">
             <label id="{{form.datetime.id_for_label}}">DATETIME: </label>

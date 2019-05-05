@@ -38,8 +38,8 @@ class ReportModelForm(forms.ModelForm):
 
 class ReportForm(forms.Form):
     CHOICES = Maintenance.TYPES
-    id = forms.IntegerField()
-    machine = forms.CharField(max_length=255)
+    id = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    machine = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control'}) )
     datetime = forms.DateTimeField()
     desc = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'class': 'form-control'}))
     state = forms.ChoiceField(choices=CHOICES)
