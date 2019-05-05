@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>สรุปยอดายการเบิกอุปกรณื</h1>
-    <form method="post">
+<div class="container my-4">
+    <h1>สรุปยอดรายการเบิกอุปกรณ์</h1>
+    <form method="post my-2">
     <div class="row my-3">
         <div class="col-2">
             <a class="btn btn-secondary" href="{% url 'stockpick' category_id machine_id %}">ย้อนกลับ</a>
@@ -33,12 +33,13 @@
                 {% for item in item_list %}
                 {% if forloop.counter == 1 %}
                 <div class="col-10">
-                    <label>เครื่องจักร : {{ item.for_machine_name }}</label>
+                    <label><b>เครื่องจักร : {{ item.for_machine_name }}</b></label>
                 </div>
                 {% endif %}
                 {% if forloop.counter == item_list|length  %}
                 <div class="col-2">
-                    <label>ยอดรวม : {{ item.total_cost }}  ฿</label>
+                    <label><b>ยอดรวม : </b></label>
+                    <label  style="color: #FE4E11;">{{ item.total_cost }}  ฿</label>
                 </div>
                 {% endif %}
                 {% endfor %}

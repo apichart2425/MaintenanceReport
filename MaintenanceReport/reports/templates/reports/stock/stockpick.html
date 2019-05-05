@@ -12,11 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="container my-3">
+<div class="container my-5">
 
     {% for stock in stock_part %}
     {% if forloop.counter == 1 %}
-    <h1 style="text-align: center">ชื่อชิ้นส่วนอุปกรณ์ : {{stock.c_name}}</h1>
+    <h1 >ชื่อชิ้นส่วนอุปกรณ์ : {{stock.c_name}}</h1>
     {% endif %}
     {% endfor %}
     <div class="row my-3">

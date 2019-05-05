@@ -14,18 +14,18 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="isit" style="text-align: center">รายการเครื่องจักทอ</h1>
+    <h1 class="isit">รายการเครื่องจักรทอผ้า</h1>
     <div class="border border-primary rounded my-3 px-5 py-3">
         {% for machine in machine_list %}
         <div class="card mb-3 row my-3 " style="max-width: 100%;margin-left: 0.15rem">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <img src="https://resources.matcha-jp.com/archive_files/jp/2016/07/hakataori_20160715e.jpg" class="card-img bg" style="height: 100%;width: 100%;" alt="...">
+                    <img src="{{machine.mac_sum}}" class="card-img bg" style="height: 100%;width: 100%;" alt="...">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h5 class="card-title">รายชื่อเครื่อง : {{machine.mac_name}}</h5>
-                        <p class="card-text">คำอธบายเครื่อง : {{machine.mac_desc}}</p>
+                        <h5 class="card-title"><b>รายชื่อเครื่อง : </b>{{machine.mac_name}}</h5>
+                        <p class="card-text"><b>คำอธบายเครื่อง : </b> {{machine.mac_desc}}</p>
                         <div class="card-body">
                             <p class="card-text text-right"><a class="btn btn-primary" href="{% url 'selectcategory' machine.mac_id %}">เลือก</a></p>
                         </div>

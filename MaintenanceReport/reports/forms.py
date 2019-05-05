@@ -42,7 +42,7 @@ class ReportForm(forms.Form):
     machine = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control'}) )
     datetime = forms.DateTimeField()
     desc = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'class': 'form-control'}))
-    state = forms.ChoiceField(choices=CHOICES)
+    state = forms.ChoiceField(choices=CHOICES,widget=forms.Select(attrs={'class': 'form-control'}))
 
 
 class MachineModelForm(forms.ModelForm):
