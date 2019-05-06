@@ -6,7 +6,7 @@ from django.core import serializers
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
-from django.db.models import Count
+from django.db import models
 from django.forms import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
@@ -341,21 +341,29 @@ def managemachine(request):
 def graph(request):
     data = []
     # x = {}
-    order = Order.objects.values('for_machine_id').annotate(num_count=Count('for_machine_id', f))
+    # order = Order.objects.values('for_machine_id').annotate(one_count=models.Sum('quantity', filter=models.Q(part_id=1)),
+    #                                                         two_count=models.Sum('quantity', filter=models.Q(part_id=2))).order_by('for_machine_id')
+    order = Order.objects.filter(for_machine_id=1).values('part_id').annotate(models.Sum('quantity')).order_by()
+    # print(order[0].quantity__sum)
+    # for item in order:
+    #     print(item['part_id'])
     for item in order:
-        machine = Machine.objects.get(pk=item.for_machine_id)
-        part = Part.objects.get(pk=item.part_id)
+        machine = Machine.objects.get(pk=1)
+        part = Part.objects.get(pk=item['part_id'])
         data.append({
             'mac_name': machine.mac_name,
             'part_code': part.part_code,
             'part_desc': part.part_desc,
-            'quantity': item.quantity,
+            'quantity': item['quantity__sum'],
             'part_cost': part.cost,
         })
-    data_source = ModelDataSource(order, fields=['part_id', 'quantity'])
-    chart = gchart.BarChart(data_source)
-    context = {'chart': chart,
-               'data': data,}
+
+    print(data)
+    # data_source = ModelDataSource(order, fields=['for_machine_id', 'one_count', 'two_count'])
+    # chart = gchart.BarChart(data_source)
+    context = {'chart':     'chart',
+               'data': order,
+               'datatest':data}
     # # for i in data:
     #
     # print(type(data))

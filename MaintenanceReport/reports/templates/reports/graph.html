@@ -6,7 +6,78 @@
 <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
 </script>
+{{datatest}}
+{% for test in datatest %}
+    {{test.part_code}}
+    {{test.quantity}}
+<br>
+{% endfor %}
+<br>
 {{data}}
+<br>
+{% for test in data %}
+    {{test.for_machine_id}}
+    {{test.part_id}}
+    {{test.quantity__sum}}
+<br>
+{% endfor %}
+
+<div id="test"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('test', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'อะไหล่ที่เบิก'
+      },
+      xAxis: {
+            type: 'category'
+          <!--categories: [-->
+            <!--{% for entry in data %}'PART{{ entry.for_machine_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}-->
+          <!--]-->
+      },
+      yAxis: {
+            title: {
+                    text: 'จำนวนยอดการเบิก'
+                    }
+            },
+      legend: {
+        enabled: false
+      },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.0f} ชิ้น'
+                }
+            }
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">อะไหล่</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f} ชิ้น</b> จากทั้งหมด<br/>'
+        },
+      series: [
+      {
+          name: 'Part',
+          colorByPoint: true,
+          data: [
+          {% for check in datatest %}
+          {
+            name:'{{check.part_code}} : {{check.part_desc}}',
+            y: {{ check.quantity }},
+          },
+          {% endfor %}
+          ],
+
+      },
+      ]
+  });
+</script>
+
+<!--{{data}}-->
 <br><br><br>
 {{order}}
 {{ chart.as_html }}
@@ -50,6 +121,7 @@
     function drawBasic() {
 
         var data = google.visualization.arrayToDataTable([
+        {% for
             ['City', '2010 Population',],
             ['New York City, NY', 8175000],
             ['Los Angeles, CA', 3792000],
