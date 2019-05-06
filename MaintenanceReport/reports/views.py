@@ -360,9 +360,11 @@ def graph(request):
     print(data)
     # data_source = ModelDataSource(order, fields=['for_machine_id', 'one_count', 'two_count'])
     # chart = gchart.BarChart(data_source)
-    context = {'chart':     'chart',
-               'data': order,
-               'datatest':data,}
+    context = {
+        'title': 'ยอดสรุปผลการซ่อม',
+        'chart':     'chart',
+        'data': order,
+        'datatest':data,}
     # # for i in data:
     #
     # print(type(data))

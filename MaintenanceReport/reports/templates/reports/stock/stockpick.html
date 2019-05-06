@@ -39,8 +39,10 @@
                 </div>
                 <div class="col-2">
 <!--                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>-->
-                    {% if stock.stock <= stock.minimum_stock %}
-                    <button class="btn btn-secondary  " href="{% url 'addtocart' stock.p_id machine_id %}" disabled> เพิ่มลงตะกร้า </button>
+                    {% if  stock.stock == 0 %}
+                    <buton class="btn btn-secondary  " href="{% url 'addtocart' stock.p_id machine_id %}" disabled="disabled"> เพิ่มลงตะกร้า </buton>
+                    {% elif stock.stock <= stock.minimum_stock  %}
+                     <a class="btn btn-warning  " href="{% url 'addtocart' stock.p_id machine_id %}" > เพิ่มลงตะกร้า </a>
                     {% else %}
                      <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
                     {% endif %}
@@ -52,8 +54,13 @@
 
             <div class="row">
                 <div class="col-6">
-                    {% if stock.stock <= stock.minimum_stock %}
+                    {% if  stock.stock == 0 %}
                     <div class="red">
+                        <label>จำนวนอุปกรณ์ที่มีในคลัง :</label> {{stock.stock}} <label> ชิ้น </label>
+                        <label style="font-size: 25px"><b>** กรุณาเติมอุปกรณ์โดยด่วน ** </b> </label>
+                    </div>
+                    {% elif stock.stock <= stock.minimum_stock %}
+                    <div class="text-primary">
                         <label>จำนวนอุปกรณ์ที่มีในคลัง :</label> {{stock.stock}} <label> ชิ้น </label>
                         <b><label> ** จำนวนอุปกรณ์ขั้นต่ำที่ควรมี :  </label> {{stock.minimum_stock}} <label> ชิ้น ** </label></b>
                     </div>
