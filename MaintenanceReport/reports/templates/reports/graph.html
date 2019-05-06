@@ -1,152 +1,86 @@
 {% extends "reports/base_template.html" %}
 
 {% block stylepage %}
-{% endblock %}
-{% block content %}
-
-<div class="container my-4">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        google.load("visualization", "1", {packages:["corechart"]});
-    </script>
-    {% for test in data %}
-    {{test.for_machine_id}}
-    {{test.one_count}}
-    {{test.two_count}}
-    <br>
-    {% endfor %}
-
-    <div id="test"></div>
-    <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <script>
-        Highcharts.chart('test', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'อะไหล่ที่เบิก'
-            },
-            xAxis: {
-                categories: [
-                {% for entry in data %}'PART{{ entry.for_machine_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}
-        ]
-        },
-        series: [
-        {% for check in data %}{
-            name: {{check.part_id}},
-            data: [
-                {{ check.quantity__sum }}{% if not forloop.last %}, {% endif %}
-        ],
-
-        },
-        {% endfor %}]
-        });
-    </script>
-
-    <!--{{data}}-->
-    <br><br><br>
-    {{order}}
-    {{ chart.as_html }}
-    <div>
-        <p>อะไหล่ ต่อ จำนวนที่ใช</p>
-        <div id="chart_div"></div>
-    </div>
-    <div>
-        <p>เครื่อง ต่อ จำนวนที่แจ้งซ่อม</p>
-        <div id="donutchart" style="width: 900px; height: 500px;"></div>
-    </div>
-    <!--    <div>-->
-    <!--    <p>category ต่อ จำนวนที่แจ้งซ่อม</p>-->
-    <!--        <div id="chart_2"></div>-->
-    <!--</div>-->
-    <!--    <div id="chart4"></div>-->
-
-</div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.setOnLoadCallback(drawBasic);
-    google.charts.setOnLoadCallback(drawBasic2);
-    google.charts.setOnLoadCallback(donutchart);
-    var x = "{{data|safe}}"
-    // alert(x)
-    var dataname =[]
-    for (data in x){
-        dataname.push(data.mac_name)
-    }
+    google.load("visualization", "1", {packages:["corechart"]});
+</script>
+{{datatest}}
+{% for test in datatest %}
+    {{test.part_code}}
+    {{test.quantity}}
+<br>
+{% endfor %}
+<br>
+{{data}}
+<br>
+{% for test in data %}
+    {{test.for_machine_id}}
+    {{test.part_id}}
+    {{test.quantity__sum}}
+<br>
+{% endfor %}
 
+<br><br><br>
+{{order}}
+{{ chart.as_html }}
+<style>
+</style>
 
-    function drawBasic() {
-
-        var data = google.visualization.arrayToDataTable([
-            ['City', '2010 Population',],
-            ['New York City, NY', 8175000],
-            ['Los Angeles, CA', 3792000],
-            ['Chicago, IL', 2695000],
-            ['Houston, TX', 2099000],
-            ['Philadelphia, PA', 1526000]
-        ]);
-
-        var options = {
-            title: 'ยอดสรุปผลการเบิกชุดอุปกร์',
-            chartArea: {width: '50%'},
-            hAxis: {
-                title: 'จำนวนการเบิกใช้งาน',
-                minValue: 0
+<div id="test"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('test', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'อะไหล่ที่เบิก'
+      },
+      xAxis: {
+            type: 'category'
+          <!--categories: [-->
+            <!--{% for entry in data %}'PART{{ entry.for_machine_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}-->
+          <!--]-->
+      },
+      yAxis: {
+            title: {
+                    text: 'จำนวนยอดการเบิก'
+                    }
             },
-            vAxis: {
-                title: 'ชุดอุปกรณ์'
+      legend: {
+        enabled: false
+      },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.0f} ชิ้น'
+                }
             }
-        };
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">อะไหล่</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f} ชิ้น</b> จากทั้งหมด<br/>'
+        },
+      series: [
+      {
+          name: 'Part',
+          colorByPoint: true,
+          data: [
+          {% for check in datatest %}
+          {
+            name:'{{check.part_code}} : {{check.part_desc}}',
+            y: {{ check.quantity }},
+          },
+          {% endfor %}
+          ],
 
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-    }
-    function drawBasic2() {
-
-        var data = google.visualization.arrayToDataTable([
-            ['City', '2010 Population',],
-            ['New York City, NY', 8175000],
-            ['Los Angeles, CA', 3792000],
-            ['Chicago, IL', 2695000],
-            ['Houston, TX', 2099000],
-            ['Philadelphia, PA', 1526000]
-        ]);
-
-        var options = {
-            title: 'ยอดสรุปผลการเบิกชุดอุปกร์',
-            chartArea: {width: '50%'},
-            hAxis: {
-                title: 'จำนวนการเบิกใช้งาน',
-                minValue: 0
-            },
-            vAxis: {
-                title: 'ชุดอุปกรณ์'
-            }
-        };
-
-        var chart = new google.visualization.BarChart(document.getElementById('chart_2'));
-
-        chart.draw(data, options);
-    }
-    function donutchart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2],
-            ['Commute',  2],
-            ['Watch TV', 2],
-            ['Sleep',    7]
-        ]);
-
-        var options = {
-            title: 'My Daily Activities',
-            pieHole: 0.4,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-    }
+      },
+      ]
+  });
 </script>
 {% endblock %}
+
