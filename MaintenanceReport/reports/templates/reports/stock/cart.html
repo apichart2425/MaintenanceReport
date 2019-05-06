@@ -13,14 +13,13 @@
 {% block content %}
 <div class="container my-4">
     <h1>สรุปยอดรายการเบิกอุปกรณ์</h1>
-    <form method="post my-2">
+    <form method="post" class="my-2">
     <div class="row my-3">
         <div class="col-2">
             <a class="btn btn-secondary" href="{% url 'stockpick' category_id machine_id %}">ย้อนกลับ</a>
         </div>
         <div class="col-8"></div>
         <div class="col-2 ">
-<!--            <img src="https://image.flaticon.com/icons/svg/126/126083.svg" alt="" style="width: 30px">-->
            <input type="submit" class="btn btn-success" value="ยืนยันการเเบิกอุปกรณ์">
         </div>
     </div>

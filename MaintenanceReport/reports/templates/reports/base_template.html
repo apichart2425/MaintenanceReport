@@ -35,6 +35,10 @@
         body{
             font-family: 'Prompt', sans-serif;
         }
+        .active, .nav-link:hover{
+            background-color: #666;
+            border-radius : 30px;
+        }
         @import url('https://fonts.googleapis.com/css?family=Prompt');
     </style>
     {% block stylepage %}
@@ -53,7 +57,7 @@
 
 {% if title != "เข้าสู่ระบบ" %}
 <!--style="background-color: #e3f2fd;"-->
-<nav class="navbar navbar-light sticky-top navbar-expand-lg bg-info text-light" >
+<nav class="navbar navbar-light sticky-top navbar-expand-lg bg-info text-light" style="font-size: 17px" >
     <a class="navbar-brand text-light" href="{% url 'index' %}">
         <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         โรงงานทอผ้าเดลต้า
@@ -69,20 +73,36 @@
             <li class="nav-item">
                 <a  class="nav-link text-light"href="{% url 'reportform' %}">แจ้งซ่อม</a>
             </li>
-            {% if user.groups.all.0.name == "supervisors" %}
+            {% if user.groups.all.0.name == "admin"%}
             <li class="nav-item">
                 <a class="nav-link text-light" href="{% url 'register' %}">สมัครสมาชิก</a>
             </li>
-            {% endif %}
-            {% if user.groups.all.0.name == "engineer" %}
             <li class="nav-item">
                 <a class="nav-link text-light" href="{% url 'selectmachine' %}">stock</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'graph' %}">ยอดสรุปการใช้อุปกรณ์</a>
+            </li>
+            {% else %}
+                {% if user.groups.all.0.name == "supervisors"%}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'register' %}">สมัครสมาชิก</a>
+                </li>
+                {% endif %}
+                {% if user.groups.all.0.name == "engineer" %}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'selectmachine' %}">stock</a>
+                </li>
+                {% endif %}
+                {% if user.groups.all.0.name == "engineer" or user.groups.all.0.name == "supervisors" %}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{% url 'graph' %}">ยอดสรุปการใช้อุปกรณ์</a>
+                </li>
+                {% endif %}
             {% endif %}
         </ul>
-
         <div class="dropdown mr-1">
-
             <a class="btn bg-info dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span id="txt"></span>
             </a>
