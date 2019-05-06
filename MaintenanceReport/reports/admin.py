@@ -12,10 +12,12 @@ class CategoryInLine(admin.StackedInline):
     model = Machine_Category
     verbose_name = "อุปกรณ์"
     verbose_name_plural = "อุปกรณ์ที่มี"
+    
     extra = 1
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'c_code', 'c_name']
+    list_display = ['id', 'c_code', 'c_name', 'image_tag']
+    readonly_fields = ('image_tag',)
     list_per_page = 10
     search_fields = ['id', 'c_code', 'c_name']
     ordering = ('id',)
@@ -35,7 +37,8 @@ class PartAdmin(admin.ModelAdmin):
 
 
 class MachineAdmin(admin.ModelAdmin):
-    list_display = ['mac_id', 'mac_name', 'mac_sum', 'mac_desc']
+    list_display = ['mac_id', 'mac_name', 'mac_sum', 'mac_desc', 'image_tag']
+    readonly_fields = ('image_tag',)
     list_per_page = 10
     ordering = ('mac_id',)
 

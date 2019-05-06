@@ -18,4 +18,5 @@ urlpatterns = [
     path('addmachine/', views.addmachine, name='addmachine'),
     path('managemachine/', views.managemachine, name='managemachine'),
     path('graph/', views.graph, name='graph'),
+    # path('ma/', views.ma, name='ma')
 ]

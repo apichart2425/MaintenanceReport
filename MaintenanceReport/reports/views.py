@@ -1,14 +1,13 @@
 import datetime
-import json
-from django.core import serializers
-
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
+from django.db import models
 from django.forms import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
+from graphos.renderers import gchart
+from graphos.sources.model import ModelDataSource
 
 from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
@@ -268,7 +267,8 @@ def selectcategory(request, machine_id):
             data.append({
                 'id': item.id,
                 'c_code': item.c_code,
-                'c_name': item.c_name
+                'c_name': item.c_name,
+                'image': item.image
             })
     context = {
         'title': title,
@@ -334,28 +334,42 @@ def managemachine(request):
 
     return render(request, template_name='reports/managemachine.html', context=context)
 
+
 def graph(request):
     data = []
-    x = {}
-    order = Order.objects.all()
-    for item in order:
-        machine = Machine.objects.get(pk=item.for_machine_id)
-        part = Part.objects.get(pk=item.part_id)
-        data.append({
-            'mac_name': machine.mac_name,
-            'part_code': part.part_code,
-            'part_desc': part.part_desc,
-            'quantity': item.quantity,
-            'part_cost': part.cost,
-        })
-    # for i in data:
+    # x = {}
+    # order = Order.objects.values('for_machine_id').annotate(one_count=models.Sum('quantity', filter=models.Q(part_id=1)),
+    #                                                         two_count=models.Sum('quantity', filter=models.Q(part_id=2))).order_by('for_machine_id')
+    order = Order.objects.filter(for_machine_id=1).values('part_id').annotate(models.Sum('quantity'))
+    # print(order[0].quantity__sum)
+    # for item in order:
+    #     print(item.part_id)
+    # for item in order:
+    #     machine = Machine.objects.get(pk=1)
+    #     part = Part.objects.get(pk=item.part_id)
+    #     data.append({
+    #         'mac_name': machine.mac_name,
+    #         'part_code': part.part_code,
+    #         'part_desc': part.part_desc,
+    #         'quantity': item.quantity__sum,
+    #         'part_cost': part.cost,
+    #     })
 
-    print(type(data))
-    context = {
-        'title': 'ยอดสรุปผลการซ่อม',
-        'data': data
-    }
+    print(order)
+    # data_source = ModelDataSource(order, fields=['for_machine_id', 'one_count', 'two_count'])
+    # chart = gchart.BarChart(data_source)
+    context = {'title': 'ยอดสรุปผลการซ่อม',
+               'chart': 'chart',
+               'data': order, }
+    # # for i in data:
+    #
+    # print(type(data))
+    # context = {
+    #     'title': 'ยอดสรุปผลการซ่อม',
+    #     'data': data
+    # }
     return render(request, template_name='reports/graph.html', context=context)
 
-# def update(request, machine_id):
-#
+# def ma(request):
+#     context = {}
+#     return render(request, template_name='reports/graph.html', context=context)

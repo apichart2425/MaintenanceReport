@@ -1,14 +1,53 @@
 {% extends "reports/base_template.html" %}
 
 {% block stylepage %}
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<style>
-</style>
 {% endblock %}
-
 {% block content %}
-<div class="container my-4">
 
+<div class="container my-4">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+    </script>
+    {% for test in data %}
+    {{test.for_machine_id}}
+    {{test.one_count}}
+    {{test.two_count}}
+    <br>
+    {% endfor %}
+
+    <div id="test"></div>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script>
+        Highcharts.chart('test', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'อะไหล่ที่เบิก'
+            },
+            xAxis: {
+                categories: [
+                {% for entry in data %}'PART{{ entry.for_machine_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+        ]
+        },
+        series: [
+        {% for check in data %}{
+            name: {{check.part_id}},
+            data: [
+                {{ check.quantity__sum }}{% if not forloop.last %}, {% endif %}
+        ],
+
+        },
+        {% endfor %}]
+        });
+    </script>
+
+    <!--{{data}}-->
+    <br><br><br>
+    {{order}}
+    {{ chart.as_html }}
     <div>
         <p>อะไหล่ ต่อ จำนวนที่ใช</p>
         <div id="chart_div"></div>
@@ -17,11 +56,11 @@
         <p>เครื่อง ต่อ จำนวนที่แจ้งซ่อม</p>
         <div id="donutchart" style="width: 900px; height: 500px;"></div>
     </div>
-<!--    <div>-->
-<!--    <p>category ต่อ จำนวนที่แจ้งซ่อม</p>-->
-<!--        <div id="chart_2"></div>-->
-<!--</div>-->
-<!--    <div id="chart4"></div>-->
+    <!--    <div>-->
+    <!--    <p>category ต่อ จำนวนที่แจ้งซ่อม</p>-->
+    <!--        <div id="chart_2"></div>-->
+    <!--</div>-->
+    <!--    <div id="chart4"></div>-->
 
 </div>
 <script type="text/javascript">
@@ -33,9 +72,8 @@
     // alert(x)
     var dataname =[]
     for (data in x){
-         dataname.push(data.mac_name)
+        dataname.push(data.mac_name)
     }
-        alert(dataname)
 
 
     function drawBasic() {
@@ -94,21 +132,21 @@
     }
     function donutchart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+            ['Task', 'Hours per Day'],
+            ['Work',     11],
+            ['Eat',      2],
+            ['Commute',  2],
+            ['Watch TV', 2],
+            ['Sleep',    7]
         ]);
 
         var options = {
-          title: 'My Daily Activities',
-          pieHole: 0.4,
+            title: 'My Daily Activities',
+            pieHole: 0.4,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
-      }
+    }
 </script>
 {% endblock %}

@@ -20,12 +20,12 @@
         <div class="card mb-3 row my-3 " style="max-width: 100%;margin-left: 0.15rem">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <img src="{{machine.mac_sum}}" class="card-img bg" style="height: 100%;width: 100%;" alt="...">
+                    <img src="{{ machine.image.url }}" class="card-img bg" style="height: 100%;width: 100%;" alt="...">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
                         <h5 class="card-title"><b>รายชื่อเครื่อง : </b>{{machine.mac_name}}</h5>
-                        <p class="card-text"><b>คำอธบายเครื่อง : </b> {{machine.mac_desc}}</p>
+                        <p class="card-text"><b>คำอธิบายเครื่อง : </b> {{machine.mac_desc}}</p>
                         <div class="card-body">
                             <p class="card-text text-right"><a class="btn btn-primary" href="{% url 'selectcategory' machine.mac_id %}">เลือก</a></p>
                         </div>
