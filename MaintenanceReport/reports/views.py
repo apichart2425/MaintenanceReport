@@ -1,8 +1,4 @@
 import datetime
-import json
-from django.core import serializers
-
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
@@ -338,8 +334,11 @@ def managemachine(request):
 
     return render(request, template_name='reports/managemachine.html', context=context)
 
+
 def graph(request):
     data = []
+    # form = GraphForm
+
     # x = {}
     # order = Order.objects.values('for_machine_id').annotate(one_count=models.Sum('quantity', filter=models.Q(part_id=1)),
     #                                                         two_count=models.Sum('quantity', filter=models.Q(part_id=2))).order_by('for_machine_id')
@@ -363,7 +362,7 @@ def graph(request):
     # chart = gchart.BarChart(data_source)
     context = {'chart':     'chart',
                'data': order,
-               'datatest':data}
+               'datatest':data,}
     # # for i in data:
     #
     # print(type(data))
@@ -373,5 +372,6 @@ def graph(request):
     # }
     return render(request, template_name='reports/graph.html', context=context)
 
-# def update(request, machine_id):
-#
+# def ma(request):
+#     context = {}
+#     return render(request, template_name='reports/graph.html', context=context)
