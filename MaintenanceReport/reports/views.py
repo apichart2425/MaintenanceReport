@@ -6,9 +6,12 @@ from django.core import serializers
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
+from django.db.models import Count
 from django.forms import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
+from graphos.renderers import gchart
+from graphos.sources.model import ModelDataSource
 
 from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
 from .forms import RegisterModelForm, ReportModelForm, ReportForm
@@ -337,8 +340,8 @@ def managemachine(request):
 
 def graph(request):
     data = []
-    x = {}
-    order = Order.objects.all()
+    # x = {}
+    order = Order.objects.values('for_machine_id').annotate(num_count=Count('for_machine_id', f))
     for item in order:
         machine = Machine.objects.get(pk=item.for_machine_id)
         part = Part.objects.get(pk=item.part_id)
@@ -349,13 +352,17 @@ def graph(request):
             'quantity': item.quantity,
             'part_cost': part.cost,
         })
-    # for i in data:
-
-    print(type(data))
-    context = {
-        'title': 'ยอดสรุปผลการซ่อม',
-        'data': data
-    }
+    data_source = ModelDataSource(order, fields=['part_id', 'quantity'])
+    chart = gchart.BarChart(data_source)
+    context = {'chart': chart,
+               'data': data,}
+    # # for i in data:
+    #
+    # print(type(data))
+    # context = {
+    #     'title': 'ยอดสรุปผลการซ่อม',
+    #     'data': data
+    # }
     return render(request, template_name='reports/graph.html', context=context)
 
 # def update(request, machine_id):

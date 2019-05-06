@@ -2,11 +2,20 @@
 
 {% block stylepage %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+</script>
+{{data}}
+<br><br><br>
+{{order}}
+{{ chart.as_html }}
 <style>
 </style>
 {% endblock %}
 
 {% block content %}
+
 <div class="container my-4">
 
     <div>
