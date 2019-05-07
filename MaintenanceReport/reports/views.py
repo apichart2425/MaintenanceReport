@@ -99,8 +99,8 @@ def my_register(request):
             check.employee_id = user.id
             form.save()
             return redirect('index')
-
-    form = RegisterModelForm()
+    else:
+        form = RegisterModelForm()
     context = {'title': "สมัครสมาชิก",'form': form}
     return render(request,'reports/register.html', context=context)
 

@@ -8,6 +8,13 @@ class RegisterModelForm(forms.ModelForm):
     password = forms.CharField(max_length=255, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     re_password = forms.CharField(max_length=255, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     # type = forms.ChoiceField(choices=Employee.TYPES, widget=forms.RadioSelect),
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new = cleaned_data.get('password')
+        repass = cleaned_data.get('re_password')
+        if new != repass:
+            raise forms.ValidationError('"รหัสผ่าน" และ "ยืนยันรหัสผ่าน" ต้องเหมือนกัน')
     class Meta:
         model = Employee
         exclude = ['employee']

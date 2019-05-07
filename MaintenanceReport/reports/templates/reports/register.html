@@ -6,6 +6,9 @@
     .isit{
         font-size: 50px;
     }
+    .errorlist{
+            color: red;
+    }
 </style>
 {% endblock %}
 
@@ -16,6 +19,9 @@
 
     <form method="POST" class="border border-primary rounded p-3 my-3 px-5 py-3">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+            <p>{{ form.non_field_errors }}</p>
+        {% endif %}
         <div class="form-group">
             <label>ชื่อผู้ใช้งาน</label>
             <p>{{form.user}}</p>
