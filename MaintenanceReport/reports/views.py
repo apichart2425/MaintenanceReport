@@ -348,7 +348,13 @@ def selectcategory(request, machine_id):
     return render(request, template_name='reports/stock/selectcategory.html', context=context)
 
 def selectmachine(request):
-    machine = Machine.objects.all()
+    if request.method == 'POST':
+        print('check')
+        searchmac = request.POST.get('searchmac')
+        print(searchmac)
+        machine = Machine.objects.filter(mac_name__icontains=searchmac)
+    else:
+        machine = Machine.objects.all()
     context = {
         'title': "รายการเครื่องจักรทอผ้า",
         'machine_list': machine
