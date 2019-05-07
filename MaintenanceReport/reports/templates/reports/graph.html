@@ -5,65 +5,16 @@
 
 {% block content %}
 <div class="container my-3">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        google.load("visualization", "1", {packages:["corechart"]});
-    </script>
-    <div id="test"></div>
-    <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <script>
-        Highcharts.chart('test', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'อะไหล่ที่เบิก'
-            },
-            xAxis: {
-                type: 'category'
-                <!--categories: [-->
-                <!--{% for entry in data %}'PART{{ entry.for_machine_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}-->
-                <!--]-->
-            },
-            yAxis: {
-                title: {
-                    text: 'จำนวนยอดการเบิก'
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                series: {
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.y:.0f} ชิ้น'
-                    }
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:11px">อะไหล่</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f} ชิ้น</b> จากทั้งหมด<br/>'
-            },
-            series: [
-                {
-                    name: 'Part',
-                    colorByPoint: true,
-                    data: [
-                    {% for check in datatest %}
-                {
-                    name:'{{check.part_code}} : {{check.part_desc}}',
-                    y: {{ check.quantity }},
-        },
-        {% endfor %}
-        ],
+    <div>
+        <div id="test"></div>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <p><b>ยอดสรุปผล :</b> จำนวนของการเบิกอะไหล่ที่มีการใช้ ในการซ่อมอุปกรณ์</p>
+    </div>
+    <div>
+        <div id="pie" style="width: 900px; height: 500px;"></div>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    </div>
 
-        },
-        ]
-        });
-    </script>
 </div>
 <div>
     <h1>TEST SET</h1>
@@ -74,7 +25,7 @@
     <br>
     {% endfor %}
     <br>
-    {{data}}
+    <p>Data</p>{{data}}
     <br>
     {% for test in data %}
     {{test.for_machine_id}}
@@ -88,4 +39,97 @@
     {{ chart.as_html }}
 
 </div>
+
+<script>
+    Highcharts.chart('test', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'อะไหล่ที่เบิก'
+        },
+        xAxis: {
+            type: 'category'
+            <!--categories: [-->
+            <!--{% for entry in data %}'PART{{ entry.for_machine_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}-->
+            <!--]-->
+        },
+        yAxis: {
+            title: {
+                text: 'จำนวนยอดการเบิก'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.0f} ชิ้น'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">อะไหล่</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f} ชิ้น</b> จากทั้งหมด<br/>'
+        },
+        series: [
+            {
+                name: 'Part',
+                colorByPoint: true,
+                data: [
+                {% for check in datatest %}
+            {
+                name:'{{check.part_code}} : {{check.part_desc}}',
+                y: {{ check.quantity }},
+    },
+    {% endfor %}
+    ],
+
+    },
+    ]
+    });
+</script>
+<script>
+    Highcharts.chart('pie', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Part',
+        colorByPoint: true,
+        data: [
+        {
+            name: 'xks',
+            y: 61.41,
+        },
+        ]
+    }]
+});
+
+</script>
 {% endblock %}
