@@ -12,6 +12,12 @@
 {% endblock %}
 
 {% block content %}
+{{ searchpart }}
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="searchpart" value="">
+    <input type="submit" value="search">
+</form>
 <div class="container my-5">
 
     {% for stock in stock_part %}

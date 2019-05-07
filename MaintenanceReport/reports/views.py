@@ -157,25 +157,49 @@ def my_logout(request):
 def stock_list(request, category_id, machine_id):
     data_stock = []
     object_list = Category.objects.filter(id=category_id)
-    for stock in object_list:
-        category_part = Category_Part.objects.filter(c=stock.id)
-        for part_list in category_part:
-            part = Part.objects.filter(id=part_list.p_id)
-            for detail in part:
-                data_stock.append({
-                    'c_name': stock.c_name,
-                    'p_id': part_list.p_id,
-                    'part_code': detail.part_code,
-                    'cost': detail.cost,
-                    'part_desc': detail.part_desc,
-                    'stock': detail.stock,
-                    'minimum_stock': detail.minimum_stock
-                })
+    if request.method == 'POST':
+        print('check')
+        # searchpart = []
+        searchpart = request.POST.get('searchpart')
+        print(searchpart)
+        for stock in object_list:
+            category_part = Category_Part.objects.filter(c=stock.id)
+            for part_list in category_part:
+                part = Part.objects.filter(id=part_list.p_id, part_desc__icontains= searchpart)
+                print(part)
+                for detail in part:
+                    data_stock.append({
+                        'c_name': stock.c_name,
+                        'p_id': part_list.p_id,
+                        'part_code': detail.part_code,
+                        'cost': detail.cost,
+                        'part_desc': detail.part_desc,
+                        'stock': detail.stock,
+                        'minimum_stock': detail.minimum_stock
+                    })
+    else:
+        for stock in object_list:
+            category_part = Category_Part.objects.filter(c=stock.id)
+            searchpart = []
+            for part_list in category_part:
+                part = Part.objects.filter(id=part_list.p_id)
+                print(part)
+                for detail in part:
+                    data_stock.append({
+                        'c_name': stock.c_name,
+                        'p_id': part_list.p_id,
+                        'part_code': detail.part_code,
+                        'cost': detail.cost,
+                        'part_desc': detail.part_desc,
+                        'stock': detail.stock,
+                        'minimum_stock': detail.minimum_stock
+                    })
     context = {
         'stock_part': data_stock,
         'stock_list': object_list,
         'category_id': category_id,
-        'machine_id': machine_id
+        'machine_id': machine_id,
+        'text': searchpart
     }
 
     return render(request, template_name='reports/stock/stockpick.html', context=context)
