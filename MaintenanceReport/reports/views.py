@@ -18,7 +18,7 @@ def index(request):
     data = []
     context = {'title': "รายการแจ้งซ่อม",}
     print(request.user)
-    test = Maintenance.objects
+    test = Maintenance.objects.all().order_by('-datetime')
     for detail in test.all():
         emp = Employee.objects.get(pk = detail.employee_id)
         emp_fname = emp.emp_fname
