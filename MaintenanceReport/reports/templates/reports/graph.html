@@ -17,6 +17,7 @@
 
 </div>
 <div>
+    {{datamaintenance}}
     <h1>TEST SET</h1>
     {{datatest}}
     {% for test in datatest %}
@@ -101,7 +102,7 @@
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares in January, 2018'
+        text: 'ยอดกรายการแจ้งซ่อมเครื่องจักร'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -120,14 +121,14 @@
         }
     },
     series: [{
-        name: 'Part',
+        name: 'เครื่องจักร',
         colorByPoint: true,
         data: [
 
-            {% for check in datatest %}
+            {% for check in datamaintenance %}
             {
-                name:'{{check.part_code}} : {{check.part_desc}}',
-                y: {{ check.quantity }}
+                name:'{{check.machine_name}}',
+                y: {{ check.check }}
         },
         {% endfor %}
         ]
