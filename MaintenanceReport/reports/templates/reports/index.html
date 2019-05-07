@@ -46,7 +46,7 @@
                 <td class="col-2">{{form.datetime}}</td>
                 <td class="col-2">{{form.emp_name}}</td>
                 <td class="col-4">{{form.desc}}</td>
-                {% if user.groups.all.0.name == "engineer" %}
+                {% if user.groups.all.0.name == "engineer" or user.groups.all.0.name == "admin" %}
                 {% if form.state == 'Succeed'%}
                 <td class="col-2"><a class="btn btn-success status btn-sm" href="{% url 'detail' maintenance_id=form.id %}">{{form.state}}</a></td>
                 {% elif form.state == 'Pending'%}
