@@ -245,6 +245,18 @@ def cart(request, category_id, machine_id):
     }
     return render(request, template_name='reports/stock/cart.html', context=context)
 
+def additem(request, part_id, employee_id, for_machine_id):
+    part = Part.objects.get(id=part_id)
+    print(part)
+    if(part.stock > 0):
+        part.stock = part.stock-1
+        part.save()
+        cart = Cart.objects.get(part_id=part_id, employee_id=employee_id, for_machine_id=for_machine_id)
+        cart.quantity = cart.quantity+1
+        cart.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def deleteitem(request, part_id, for_machine_id):
     cart = Cart.objects.get(part_id=part_id, for_machine_id=for_machine_id)
     part = Part.objects.get(id=part_id)
