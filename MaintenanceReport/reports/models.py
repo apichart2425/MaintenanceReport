@@ -100,19 +100,6 @@ class Machine_Category(models.Model):
     def __str__(self):
         return self.category.c_name
 
-class Machine_Part(models.Model):
-    part = models.ForeignKey(Part, on_delete=models.CASCADE, unique=True)
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE, unique=True)
-    unit = models.IntegerField()
-    maintenance = models.ManyToManyField(Maintenance, through='Maintenance_Machine_Part')
-    class Meta:
-        unique_together = (('part','machine'),)
-
-class Maintenance_Machine_Part(models.Model):
-    maintenance = models.ForeignKey(Maintenance, on_delete=models.CASCADE)
-    machine_part = models.ForeignKey(Machine_Part, on_delete=models.CASCADE)
-    description = models.CharField(max_length=255)
-
 class Cart(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     part = models.ForeignKey(Part, on_delete=models.CASCADE)

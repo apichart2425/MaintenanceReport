@@ -10,7 +10,6 @@
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
         <br>
         <p><b>ยอดสรุปผล :</b> จำนวนของการเบิกอะไหล่ที่มีการใช้ ในการซ่อมอุปกรณ์</p><br>
-
     </div>
     <hr>
     <div class="mx-5">
@@ -18,11 +17,12 @@
         <br>
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
         <p><b>ยอดสรุปผล :</b> ยอดการแสดงจำนวนการแจ้งซ่อมของเครื่องจักรทอผ้า</p><br>
+
     </div>
 
 </div>
 <div>
-
+    <br>
 </div>
 
 <script>
@@ -86,7 +86,7 @@
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares in January, 2018'
+        text: 'ยอดรายการแจ้งซ่อมเครื่องจักร'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -105,14 +105,14 @@
         }
     },
     series: [{
-        name: 'Part',
+        name: 'เครื่องจักร',
         colorByPoint: true,
         data: [
 
-            {% for check in datatest %}
+            {% for check in datamaintenance %}
             {
-                name:'{{check.mac_name}} : {{check.mac_desc}}',
-                y: {{ check.quantity }}
+                name:'{{check.machine_name}}  ',
+                y: {{ check.check }}
         },
         {% endfor %}
         ]

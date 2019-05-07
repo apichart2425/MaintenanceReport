@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b0252c0-1910-4e33-b2b6-e851d95c8848" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MaintenanceReport/reports/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/graph.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MaintenanceReport/reports/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MaintenanceReport/reports/views.py" afterDir="false" />
     </list>
@@ -17,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="839">
-              <caret line="344" column="25" selection-start-line="344" selection-start-column="25" selection-end-line="344" selection-end-column="25" />
+            <state relative-caret-position="544">
+              <caret line="378" column="24" selection-start-line="378" selection-start-column="9" selection-end-line="378" selection-end-column="24" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -29,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/graph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="129" column="39" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
+            <state relative-caret-position="127">
+              <caret line="104" column="44" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -107,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-521">
-              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="228">
+              <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -131,6 +131,7 @@
       <find>part</find>
       <find>count</find>
       <find>name: 'Part',</find>
+      <find>Machine_Part</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,19 +159,19 @@
         <option value="$PROJECT_DIR$/MaintenanceReport/MaintenanceReport/urls.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/stock/selectcategory.html" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/stock/selectmachine.html" />
-        <option value="$PROJECT_DIR$/MaintenanceReport/reports/models.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/admin.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/MaintenanceReport/settings.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/stock/cart.html" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/forms.py" />
+        <option value="$PROJECT_DIR$/MaintenanceReport/reports/models.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/views.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/graph.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="566" />
-    <option name="y" value="37" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="528" />
+    <option name="y" value="13" />
     <option name="width" value="1400" />
     <option name="height" value="1025" />
   </component>
@@ -278,11 +279,11 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="423" y="11" width="1120" height="820" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17118308" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23915051" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3287483" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.3289256" />
@@ -461,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-521">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="228">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -471,8 +472,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="839">
-          <caret line="344" column="25" selection-start-line="344" selection-start-column="25" selection-end-line="344" selection-end-column="25" />
+        <state relative-caret-position="544">
+          <caret line="378" column="24" selection-start-line="378" selection-start-column="9" selection-end-line="378" selection-end-column="24" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -481,8 +482,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MaintenanceReport/reports/templates/reports/graph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="129" column="39" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
+        <state relative-caret-position="127">
+          <caret line="104" column="44" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
