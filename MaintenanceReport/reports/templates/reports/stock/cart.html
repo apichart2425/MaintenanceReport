@@ -46,19 +46,34 @@
         <table class="table table-hover">
             <thead>
                 <tr class="headtable row">
-                    <th class="col-3">รหัสชิ้นส่วนอะไหล่</th>
-                    <th class="col-2">จำนวน</th>
-                    <th class="col-2">ราคาบาทต่อชิ้น</th>
-                    <th class="col-2">ราคารวม</th>
-                    <th class="col-2"> </th>
+                    <th class="col">รหัสชิ้นส่วนอะไหล่</th>
+                    <th class="col">จำนวน</th>
+                    <th class="col">ราคาบาทต่อชิ้น</th>
+                    <th class="col">ราคารวม</th>
+                    <th class="col"> </th>
                 </tr>
             </thead>
             {% for item in item_list %}
             <tr class="row">
-                <td class="col-3">{{item.part_code}}</td>
-                <td class="col-2">{{item.quantity}} ชิ้น</td>
-                <td class="col-2">{{item.cost_one}} ฿</td>
-                <td class="col-2">{{item.cost_total}} ฿</td>
+                <td class="col">{{item.part_code}}</td>
+                <td class="col">{{item.quantity}} ชิ้น</td>
+                <td class="col">{{item.cost_one}} ฿</td>
+                <td class="col">{{item.cost_total}} ฿</td>
+
+                <td>
+                    <div class="border  bg-success rounded rounded-lg">
+                        <a class=" btn col-2 text-light" href="{% url 'additem' item.part_id item.for_machine_id item.employee_id %}">
+                            +
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="border  bg-success rounded rounded-lg">
+                        <a class=" btn col-2 text-light" href="{% url 'decreaseitem' item.part_id item.for_machine_id item.employee_id %}">
+                            -
+                        </a>
+                    </div>
+                </td>
                 <td>
                     <div class="border border-danger bg-danger rounded rounded-lg">
                         <a class=" btn col-2 text-light" href="{% url 'deleteitem' item.part_id item.for_machine_id %}">

@@ -32,7 +32,7 @@ class PartAdmin(admin.ModelAdmin):
     list_display = ['id', 'part_code', 'part_desc', 'stock', 'minimum_stock', 'cost']
     list_per_page = 10
     ordering = ('id',)
-    search_fields = ['part_name', 'id','part_desc']
+    search_fields = ['part_code', 'id','part_desc']
     inlines = [CategoryPartInLine]
 
 
