@@ -4,6 +4,17 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
+    <br>
+<form method="POST">
+    {% csrf_token %}
+    Start Date :{{ form.start_date }}
+    EndDate :{{ form.end_date }}
+
+    <input type="submit" value="ยืนยัน">
+</form>
+    <br>
+</div>
 <div class="container my-3">
     <div>
         <div id="test"></div>

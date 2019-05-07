@@ -1,4 +1,5 @@
 import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
@@ -10,7 +11,7 @@ from graphos.renderers import gchart
 from graphos.sources.model import ModelDataSource
 
 from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
-from .forms import RegisterModelForm, ReportModelForm, ReportForm
+from .forms import RegisterModelForm, ReportModelForm, ReportForm, DateSelectForm
 
 
 @login_required
@@ -312,17 +313,18 @@ def selectcategory(request, machine_id):
     if request.method == 'POST':
         print('check')
         searchcat = request.POST.get('searchcat')
-    for category_list in machine:
-        category = Category.objects.filter(id=category_list.category_id, c_name__icontains=searchcat)
-        machine_name = Machine.objects.get(pk=machine_id)
-        title = "อะไหล่อุปกรณ์ " + str(machine_name)
-        for item in category:
-            data.append({
-                'id': item.id,
-                'c_code': item.c_code,
-                'c_name': item.c_name,
-                'image': item.image
-            })
+        print(searchcat)
+        for category_list in machine:
+            category = Category.objects.filter(id=category_list.category_id, c_name__icontains=searchcat)
+            machine_name = Machine.objects.get(pk=machine_id)
+            title = "อะไหล่อุปกรณ์ " + str(machine_name)
+            for item in category:
+                data.append({
+                    'id': item.id,
+                    'c_code': item.c_code,
+                    'c_name': item.c_name,
+                    'image': item.image
+                })
     else:
         for category_list in machine:
             category = Category.objects.filter(id=category_list.category_id)
@@ -354,45 +356,6 @@ def selectmachine(request):
     return render(request, template_name='reports/stock/selectmachine.html', context=context)
 
 
-def addmachine(request):
-    context = {}
-    CategoryFormSet = formset_factory(CategoryModelForm, extra=3)
-
-    if request.method == 'POST':
-        form = MachineModelForm(request.POST)
-        formset = CategoryFormSet(request.POST)
-        if form.is_valid():
-            machine = form.save()
-            if formset.is_valid():
-                for category_form in formset:
-                    try:
-                        if category_form.cleaned_data.get('c_code'):
-                            check = Category.objects.get(c_code=category_form.cleaned_data.get('c_code'))
-                            Machine_Category.objects.create(
-                                category_id=check.id,
-                                machine_id=machine.mac_id
-                            )
-                    except Category.DoesNotExist:
-                        if category_form.cleaned_data.get('c_code'):
-                            check = Category.objects.create(
-                                c_code=category_form.cleaned_data.get('c_code'),
-                                c_name=category_form.cleaned_data.get('c_name')
-                            )
-                            Machine_Category.objects.create(
-                                category_id=check.id,
-                                machine_id=machine.mac_id
-                            )
-                return redirect('managemachine')
-    else:
-        form = MachineModelForm()
-        formset = CategoryFormSet()
-
-    context['form'] = form
-    context['formset'] = formset
-
-    return render(request, template_name='reports/addmachine.html', context=context)
-
-
 def managemachine(request):
     machine = Machine.objects.all()
     context = {
@@ -405,17 +368,18 @@ def managemachine(request):
 def graph(request):
     data = []
     machinedataset = []
-    # form = GraphForm
-
-    # x = {}
-    # order = Order.objects.values('for_machine_id').annotate(one_count=models.Sum('quantity', filter=models.Q(part_id=1)),
-    #                                                         two_count=models.Sum('quantity', filter=models.Q(part_id=2))).order_by('for_machine_id')
-    order = Order.objects.values('part_id').annotate(models.Sum('quantity')).order_by()
-    maintenance = Maintenance.objects.values('machine_id').annotate(check=models.Count('machine_id'))
+    if request.method == 'POST':
+        form = DateSelectForm(request.POST)
+        if form.is_valid():
+            prev = form.cleaned_data.get('start_date')
+            now = form.cleaned_data.get('end_date')
+    else:
+        form = DateSelectForm()
+        prev = datetime.date.today().replace(day=1)
+        now = datetime.date.today() + datetime.timedelta(days=1)
+    order = Order.objects.filter(datetime__gte=prev, datetime__lte=now).values('part_id').annotate(models.Sum('quantity')).order_by('-quantity__sum')
+    maintenance = Maintenance.objects.filter(datetime__gte=prev, datetime__lte=now).values('machine_id').annotate(check=models.Count('machine_id'))
     print(maintenance)
-    # print(order[0].quantity__sum)
-    # for item in order:
-    #     print(item['part_id'])
     print(order)
     for item in order:
         part = Part.objects.get(pk=item['part_id'])
@@ -436,23 +400,11 @@ def graph(request):
 
     print(data)
     print(machinedataset)
-    # data_source = ModelDataSource(order, fields=['for_machine_id', 'one_count', 'two_count'])
-    # chart = gchart.BarChart(data_source)
     context = {
         'title': 'ยอดสรุปผลการซ่อม',
         'chart':     'chart',
         'data': order,
         'datatest':data,
-        'datamaintenance': machinedataset}
-    # # for i in data:
-    #
-    # print(type(data))
-    # context = {
-    #     'title': 'ยอดสรุปผลการซ่อม',
-    #     'data': data
-    # }
+        'datamaintenance': machinedataset,
+        'form': form}
     return render(request, template_name='reports/graph.html', context=context)
-
-# def ma(request):
-#     context = {}
-#     return render(request, template_name='reports/graph.html', context=context)

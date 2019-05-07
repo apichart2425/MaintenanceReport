@@ -54,3 +54,9 @@ class CategoryModelForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = '__all__'
+
+class DateSelectForm(forms.Form):
+    start_date = forms.DateField(required=True,
+                                 widget=forms.widgets.DateInput(attrs={'type':'date'}))
+    end_date = forms.DateField(required=True,
+                                 widget=forms.widgets.DateInput(attrs={'type':'date'}))
