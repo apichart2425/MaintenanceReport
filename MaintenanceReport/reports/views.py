@@ -309,8 +309,11 @@ def selectcategory(request, machine_id):
     data = []
     machine = Machine_Category.objects.filter(machine_id=machine_id)
     print(machine)
+    if request.method == 'POST':
+        print('check')
+        searchcat = request.POST.get('searchcat')
     for category_list in machine:
-        category = Category.objects.filter(id=category_list.category_id)
+        category = Category.objects.filter(id=category_list.category_id, c_name__icontains=searchcat)
         machine_name = Machine.objects.get(pk=machine_id)
         title = "อะไหล่อุปกรณ์ " + str(machine_name)
         for item in category:
@@ -320,10 +323,24 @@ def selectcategory(request, machine_id):
                 'c_name': item.c_name,
                 'image': item.image
             })
+    else:
+        for category_list in machine:
+            category = Category.objects.filter(id=category_list.category_id)
+            machine_name = Machine.objects.get(pk=machine_id)
+            title = "อะไหล่อุปกรณ์ " + str(machine_name)
+            searchcat = []
+            for item in category:
+                data.append({
+                    'id': item.id,
+                    'c_code': item.c_code,
+                    'c_name': item.c_name,
+                    'image': item.image
+                })
     context = {
         'title': title,
         'category': data,
-        'machine_id': machine_id
+        'machine_id': machine_id,
+        'text': searchcat
     }
     print("name %s" %title)
     return render(request, template_name='reports/stock/selectcategory.html', context=context)

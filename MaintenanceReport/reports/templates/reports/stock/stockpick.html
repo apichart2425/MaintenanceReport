@@ -2,10 +2,11 @@
 
 {% block stylepage %}
 <style>
-    .isit{
+    .isit {
         text-align: center;
     }
-    .red{
+
+    .red {
         color: red;
     }
 </style>
@@ -13,16 +14,25 @@
 
 {% block content %}
 {{ searchpart }}
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="searchpart" value="">
-    <input type="submit" value="search">
-</form>
+<div class="container my-5 ">
+    <div class="row my-3">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <form method="POST" class="form-inline">
+                {% csrf_token %}
+                <input class="form-control form-control mr-sm-2" type="text" name="searchpart" placeholder="Search.."
+                       aria-label="Search.."
+                       value="">
+                <input type="submit" value="search" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+</div>
 <div class="container my-5">
 
     {% for stock in stock_part %}
     {% if forloop.counter == 1 %}
-    <h1 >ชื่อชิ้นส่วนอุปกรณ์ : {{stock.c_name}}</h1>
+    <h1>ชื่อชิ้นส่วนอุปกรณ์ : {{stock.c_name}}</h1>
     {% endif %}
     {% endfor %}
     <div class="row my-3">
@@ -35,7 +45,7 @@
             <a class="btn btn-success left" href="{% url 'cart' category_id machine_id %}">ตะกร้าอุปกรณ์</a>
         </div>
     </div>
-     {% for stock in stock_part %}
+    {% for stock in stock_part %}
     <div class="mb-3">
         <div class="border border-success rounded-lg py-3 px-3 ">
             <div class="row">
@@ -44,23 +54,25 @@
                     {{stock.part_desc}}
                 </div>
                 <div class="col-2">
-<!--                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>-->
-                    {% if  stock.stock == 0 %}
-                    <buton class="btn btn-secondary  " href="{% url 'addtocart' stock.p_id machine_id %}" disabled="disabled"> เพิ่มลงตะกร้า </buton>
-                    {% elif stock.stock <= stock.minimum_stock  %}
-                     <a class="btn btn-warning  " href="{% url 'addtocart' stock.p_id machine_id %}" > เพิ่มลงตะกร้า </a>
+                    <!--                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>-->
+                    {% if stock.stock == 0 %}
+                    <buton class="btn btn-secondary  " href="{% url 'addtocart' stock.p_id machine_id %}"
+                           disabled="disabled"> เพิ่มลงตะกร้า
+                    </buton>
+                    {% elif stock.stock <= stock.minimum_stock %}
+                    <a class="btn btn-warning  " href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
                     {% else %}
-                     <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
+                    <a class="btn btn-warning" href="{% url 'addtocart' stock.p_id machine_id %}"> เพิ่มลงตะกร้า </a>
                     {% endif %}
                 </div>
             </div>
             <div>
-                <label>หมายเลขชิ้นส่วนอุปกรณ์ :  {{stock.part_code}}</label>
+                <label>หมายเลขชิ้นส่วนอุปกรณ์ : {{stock.part_code}}</label>
             </div>
 
             <div class="row">
                 <div class="col-6">
-                    {% if  stock.stock == 0 %}
+                    {% if stock.stock == 0 %}
                     <div class="red">
                         <label>จำนวนอุปกรณ์ที่มีในคลัง :</label> {{stock.stock}} <label> ชิ้น </label>
                         <label style="font-size: 25px"><b>** กรุณาเติมอุปกรณ์โดยด่วน ** </b> </label>
@@ -68,11 +80,12 @@
                     {% elif stock.stock <= stock.minimum_stock %}
                     <div class="text-primary">
                         <label>จำนวนอุปกรณ์ที่มีในคลัง :</label> {{stock.stock}} <label> ชิ้น </label>
-                        <b><label> ** จำนวนอุปกรณ์ขั้นต่ำที่ควรมี :  </label> {{stock.minimum_stock}} <label> ชิ้น ** </label></b>
+                        <b><label> ** จำนวนอุปกรณ์ขั้นต่ำที่ควรมี : </label> {{stock.minimum_stock}} <label> ชิ้น
+                            ** </label></b>
                     </div>
                     {% else %}
                     <div>
-                        <label>จำนวนอุปกรณ์ที่มีในคลัง :  </label>{{stock.stock}} <label> ชิ้น </label>
+                        <label>จำนวนอุปกรณ์ที่มีในคลัง : </label>{{stock.stock}} <label> ชิ้น </label>
                     </div>
                     {% endif %}
 
