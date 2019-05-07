@@ -116,9 +116,11 @@
                 <span id="txt"></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                {% if user.groups.all.0.name == "supervisors" or user.groups.all.0.name == "engineer" or user.groups.all.0.name == "admin"%}
                 <span class="navbar-text dropdown-item">
                     <a href="/admin/">admin</a>
                 </span>
+                {% endif %}
                 <span class="navbar-text dropdown-item">
                     <a href="{% url 'logout' %}">logout</a>
                 </span>
