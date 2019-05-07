@@ -8,35 +8,20 @@
     <div>
         <div id="test"></div>
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
-        <p><b>ยอดสรุปผล :</b> จำนวนของการเบิกอะไหล่ที่มีการใช้ ในการซ่อมอุปกรณ์</p>
+        <br>
+        <p><b>ยอดสรุปผล :</b> จำนวนของการเบิกอะไหล่ที่มีการใช้ ในการซ่อมอุปกรณ์</p><br>
+
     </div>
-    <div>
-        <div id="pie" style="width: 900px; height: 500px;"></div>
+    <hr>
+    <div class="mx-5">
+        <div class="mx-5" id="pie" style="width: 900px; height: 500px;"></div>
+        <br>
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <p><b>ยอดสรุปผล :</b> ยอดการแสดงจำนวนการแจ้งซ่อมของเครื่องจักรทอผ้า</p><br>
     </div>
 
 </div>
 <div>
-    <h1>TEST SET</h1>
-    {{datatest}}
-    {% for test in datatest %}
-    {{test.part_code}}
-    {{test.quantity}}
-    <br>
-    {% endfor %}
-    <br>
-    <p>Data</p>{{data}}
-    <br>
-    {% for test in data %}
-    {{test.for_machine_id}}
-    {{test.part_id}}
-    {{test.quantity__sum}}
-    <br>
-    {% endfor %}
-
-    <br><br><br>
-    {{order}}
-    {{ chart.as_html }}
 
 </div>
 
@@ -46,7 +31,7 @@
             type: 'column'
         },
         title: {
-            text: 'อะไหล่ที่เบิก'
+            text: 'ยอดการเบิกอะไหล่'
         },
         xAxis: {
             type: 'category'
@@ -122,13 +107,15 @@
     series: [{
         name: 'Part',
         colorByPoint: true,
-        data: [{% for i in dataset%}
-        {
-            name: 'xks',
-            y: 61.41,
+        data: [
+
+            {% for check in datatest %}
+            {
+                name:'{{check.mac_name}} : {{check.mac_desc}}',
+                y: {{ check.quantity }}
         },
-    {%endfor%}
-    ]
+        {% endfor %}
+        ]
     }]
 });
 

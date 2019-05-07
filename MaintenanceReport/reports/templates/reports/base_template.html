@@ -39,6 +39,15 @@
             background-color: #666;
             border-radius : 30px;
         }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
         @import url('https://fonts.googleapis.com/css?family=Prompt');
     </style>
     {% block stylepage %}
@@ -47,10 +56,10 @@
 </head>
 <body onload="startTime()">
 <div id="loader-wrapper">
-  <div id="loader"></div>
+    <div id="loader"></div>
 
-  <div class="loader-section section-left"></div>
-  <div class="loader-section section-right"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
 
 </div>
 
@@ -85,21 +94,21 @@
                 <a class="nav-link text-light" href="{% url 'graph' %}">ยอดสรุปการใช้อุปกรณ์</a>
             </li>
             {% else %}
-                {% if user.groups.all.0.name == "supervisors"%}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'register' %}">สมัครสมาชิก</a>
-                </li>
-                {% endif %}
-                {% if user.groups.all.0.name == "engineer" %}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'selectmachine' %}">stock</a>
-                </li>
-                {% endif %}
-                {% if user.groups.all.0.name == "engineer" or user.groups.all.0.name == "supervisors" %}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'graph' %}">ยอดสรุปการใช้อุปกรณ์</a>
-                </li>
-                {% endif %}
+            {% if user.groups.all.0.name == "supervisors"%}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'register' %}">สมัครสมาชิก</a>
+            </li>
+            {% endif %}
+            {% if user.groups.all.0.name == "engineer" %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'selectmachine' %}">stock</a>
+            </li>
+            {% endif %}
+            {% if user.groups.all.0.name == "engineer" or user.groups.all.0.name == "supervisors" %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'graph' %}">ยอดสรุปการใช้อุปกรณ์</a>
+            </li>
+            {% endif %}
             {% endif %}
         </ul>
         <div class="dropdown mr-1">
@@ -122,15 +131,28 @@
 {% block content %}
 {% endblock %}
 
+<div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small bg-info footer">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+</div>
 <script>
     $(document).ready(function() {
 
-  // Fakes the loading setting a timeout
-    setTimeout(function() {
-        $('body').addClass('loaded');
-    }, 3500);
+        // Fakes the loading setting a timeout
+        setTimeout(function() {
+            $('body').addClass('loaded');
+        }, 3500);
 
-});
+    });
 </script>
 </body>
 </html>
