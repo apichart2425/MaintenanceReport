@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Permission
 
-from .models import Machine, Category, Machine_Category, Part, Category_Part
+from .models import Machine, Category, Machine_Category, Part, Category_Part, Maintenance
 
 
 class PartInLine(admin.StackedInline):
@@ -44,10 +44,16 @@ class MachineAdmin(admin.ModelAdmin):
 
     inlines = [CategoryInLine]
 
+class MaintenanceAdmin(admin.ModelAdmin):
+    list_display = ['id', 'machine_id', 'desc', 'datetime', 'state']
+    list_per_page = 10
+    list_filter = ['machine_id', 'state', 'desc', 'datetime']
+    ordering = ('id',)
+
 admin.site.register(Machine, MachineAdmin)
 
 admin.site.register(Part, PartAdmin)
 
 admin.site.register(Category, CategoryAdmin)
 
-
+admin.site.register(Maintenance, MaintenanceAdmin)
