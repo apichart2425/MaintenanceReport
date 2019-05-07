@@ -342,7 +342,7 @@ def graph(request):
     # x = {}
     # order = Order.objects.values('for_machine_id').annotate(one_count=models.Sum('quantity', filter=models.Q(part_id=1)),
     #                                                         two_count=models.Sum('quantity', filter=models.Q(part_id=2))).order_by('for_machine_id')
-    order = Order.objects.filter(for_machine_id=1).values('part_id').annotate(models.Sum('quantity')).order_by()
+    order = Order.objects.values('part_id').annotate(models.Sum('quantity')).order_by()
     # print(order[0].quantity__sum)
     # for item in order:
     #     print(item['part_id'])

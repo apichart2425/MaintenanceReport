@@ -46,7 +46,7 @@
             type: 'column'
         },
         title: {
-            text: 'อะไหล่ที่เบิก'
+            text: 'ยอดการเบิกอะไหล่'
         },
         xAxis: {
             type: 'category'
@@ -123,10 +123,13 @@
         name: 'Part',
         colorByPoint: true,
         data: [
-        {
-            name: 'xks',
-            y: 61.41,
+
+            {% for check in datatest %}
+            {
+                name:'{{check.part_code}} : {{check.part_desc}}',
+                y: {{ check.quantity }}
         },
+        {% endfor %}
         ]
     }]
 });
