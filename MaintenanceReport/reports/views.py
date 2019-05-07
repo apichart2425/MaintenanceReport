@@ -257,6 +257,20 @@ def additem(request, part_id, employee_id, for_machine_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def decreaseitem(request, part_id, employee_id, for_machine_id):
+    part = Part.objects.get(id=part_id)
+    print(part)
+    cart = Cart.objects.get(part_id=part_id, employee_id=employee_id, for_machine_id=for_machine_id)
+    if(cart.quantity == 1):
+        cart.delete()
+    else:
+        part.stock = part.stock+1
+        part.save()
+        cart.quantity = cart.quantity-1
+        cart.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def deleteitem(request, part_id, for_machine_id):
     cart = Cart.objects.get(part_id=part_id, for_machine_id=for_machine_id)
     part = Part.objects.get(id=part_id)
