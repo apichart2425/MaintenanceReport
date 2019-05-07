@@ -122,12 +122,13 @@
     series: [{
         name: 'Part',
         colorByPoint: true,
-        data: [
+        data: [{% for i in dataset%}
         {
             name: 'xks',
             y: 61.41,
         },
-        ]
+    {%endfor%}
+    ]
     }]
 });
 
