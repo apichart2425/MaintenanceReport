@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
 from django.db import models
 from django.forms import formset_factory
@@ -12,6 +12,14 @@ from graphos.sources.model import ModelDataSource
 
 from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
 from .forms import RegisterModelForm, ReportModelForm, ReportForm, DateSelectForm
+
+def group_required(*group_names):
+    def in_groups(u):
+        if u.is_authenticated:
+            if bool(u.groups.filter(name__in=group_names)) | u.is_superuser:
+                return True
+        return False
+    return user_passes_test(in_groups, login_url='login')
 
 
 @login_required
@@ -130,6 +138,7 @@ def report_form(request):
     return render(request,'reports/reportform.html', context=context)
 
 @login_required
+@group_required('engineer')
 def detail(request, maintenance_id):
     context = {'title': "รายละเอียดการแจ้งซ่อม",}
     detail = Maintenance.objects.get(pk=maintenance_id)
@@ -157,10 +166,13 @@ def detail(request, maintenance_id):
     context['formset'] = formset
     return render(request, 'reports/detail.html', context=context)
 
+@login_required
 def my_logout(request):
     logout(request)
     return  redirect('login')
 
+@login_required
+@group_required('engineer')
 def stock_list(request, category_id, machine_id):
     data_stock = []
     object_list = Category.objects.filter(id=category_id)
@@ -211,6 +223,8 @@ def stock_list(request, category_id, machine_id):
 
     return render(request, template_name='reports/stock/stockpick.html', context=context)
 
+@login_required
+@group_required('engineer')
 def addtocart(request, part_id, machine_id):
     part = Part.objects.get(id=part_id)
     part_stock = part.stock
@@ -236,6 +250,8 @@ def addtocart(request, part_id, machine_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     # return redirect('stockpick')
 
+@login_required
+@group_required('engineer')
 def cart(request, category_id, machine_id):
     data = []
     total_cost = 0
@@ -276,6 +292,8 @@ def cart(request, category_id, machine_id):
     }
     return render(request, template_name='reports/stock/cart.html', context=context)
 
+@login_required
+@group_required('engineer')
 def additem(request, part_id, employee_id, for_machine_id):
     part = Part.objects.get(id=part_id)
     print(part)
@@ -288,6 +306,8 @@ def additem(request, part_id, employee_id, for_machine_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@login_required
+@group_required('engineer')
 def decreaseitem(request, part_id, employee_id, for_machine_id):
     part = Part.objects.get(id=part_id)
     print(part)
@@ -302,6 +322,8 @@ def decreaseitem(request, part_id, employee_id, for_machine_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@login_required
+@group_required('engineer')
 def deleteitem(request, part_id, for_machine_id):
     cart = Cart.objects.get(part_id=part_id, for_machine_id=for_machine_id)
     part = Part.objects.get(id=part_id)
@@ -312,6 +334,8 @@ def deleteitem(request, part_id, for_machine_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     # return redirect('cart')
 
+@login_required
+@group_required('engineer')
 def selectcategory(request, machine_id):
     data = []
     machine = Machine_Category.objects.filter(machine_id=machine_id)
@@ -353,6 +377,8 @@ def selectcategory(request, machine_id):
     print("name %s" %title)
     return render(request, template_name='reports/stock/selectcategory.html', context=context)
 
+@login_required
+@group_required('engineer')
 def selectmachine(request):
     if request.method == 'POST':
         print('check')
@@ -367,7 +393,7 @@ def selectmachine(request):
     }
     return render(request, template_name='reports/stock/selectmachine.html', context=context)
 
-
+@login_required
 def managemachine(request):
     machine = Machine.objects.all()
     context = {
@@ -376,7 +402,8 @@ def managemachine(request):
 
     return render(request, template_name='reports/managemachine.html', context=context)
 
-
+@login_required
+@group_required('engineer', 'supervisors')
 def graph(request):
     data = []
     machinedataset = []
