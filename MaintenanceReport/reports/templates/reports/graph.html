@@ -6,12 +6,12 @@
 {% block content %}
 <div class="container">
     <br>
-    <form method="POST">
+    <form method="POST" class="">
         {% csrf_token %}
-        <div class="form-row ml-5" >
+        <div class="form-row mx-5" >
             <div class="col-3 form-group">
                 StartDate :
-                <label for="">{{ form.start_date }}</label>
+                {{ form.start_date }}</label>
             </div>
             <div class="col-3 form-group">
                 EndDate :
