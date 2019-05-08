@@ -447,3 +447,33 @@ def graph(request):
         'datamaintenance': machinedataset,
         'form': form}
     return render(request, template_name='reports/graph.html', context=context)
+
+# @login_required
+# def working(request):
+#     data = []
+#     context = {'title': "รายการแจ้งซ่อม",}
+#     print(request.user)
+#     test = Maintenance.objects.all().order_by('-datetime')
+#     for detail in test.all():
+#         emp = Employee.objects.get(pk = detail.employee_id)
+#         emp_fname = emp.emp_fname
+#         emp_lname = emp.emp_lname
+#         emp_name = emp_fname + " " + emp_lname
+#         print("name is %s" %(emp_name))
+#         data.append(
+#             {
+#                 'id': detail.id,
+#                 'machine': detail.machine,
+#                 'datetime': detail.datetime,
+#                 'state': detail.state,
+#                 'desc': detail.desc,
+#                 'emp_name' : emp_name
+#             }
+#         )
+#     # MaintenanceFormSet = formset_factory(ReportModelForm, max_num=len(data))
+#     # formset = MaintenanceFormSet(initial=data)
+#     formset = data
+#     print(data)
+#     context['formset'] = formset
+#
+#     return render(request, template_name='reports/working.html', context= context)
