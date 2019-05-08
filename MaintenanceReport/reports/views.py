@@ -71,38 +71,43 @@ def my_login(request):
 
 @login_required
 def my_register(request):
+    context = {}
     if request.method == 'POST':
         form = RegisterModelForm(request.POST)
         if form.is_valid():
+            try:
+                user = User.objects.get(username=form.cleaned_data.get('user'))
+                context['usererror'] = 'ชื่อผู้ใช้งานนี้มีในระบบแล้ว'
+            except User.DoesNotExist:
+                user = User.objects.create_user(
+                    username = form.cleaned_data.get('user'),
+                    password = form.cleaned_data.get('password'),
+                    first_name = form.cleaned_data.get('emp_fname'),
+                    last_name = form.cleaned_data.get('emp_lname'),
+                    email = form.cleaned_data.get('emp_email')
 
-            user = User.objects.create_user(
-                username = form.cleaned_data.get('user'),
-                password = form.cleaned_data.get('password'),
-                first_name = form.cleaned_data.get('emp_fname'),
-                last_name = form.cleaned_data.get('emp_lname'),
-                email = form.cleaned_data.get('emp_email')
+                )
+                user.save()
+                if form.cleaned_data.get('type') == '01':
+                    group = Group.objects.get(name='weavers')
+                    user.groups.add(group)
 
-            )
-            user.save()
-            if form.cleaned_data.get('type') == '01':
-                group = Group.objects.get(name='weavers')
-                user.groups.add(group)
+                if form.cleaned_data.get('type') == '02':
+                    group = Group.objects.get(name='supervisors')
+                    user.groups.add(group)
 
-            if form.cleaned_data.get('type') == '02':
-                group = Group.objects.get(name='supervisors')
-                user.groups.add(group)
+                if form.cleaned_data.get('type') == '03':
+                    group = Group.objects.get(name='engineer')
+                    user.groups.add(group)
 
-            if form.cleaned_data.get('type') == '03':
-                group = Group.objects.get(name='engineer')
-                user.groups.add(group)
-
-            check = form.save(commit=False)
-            check.employee_id = user.id
-            form.save()
-            return redirect('index')
+                check = form.save(commit=False)
+                check.employee_id = user.id
+                form.save()
+                return redirect('index')
     else:
         form = RegisterModelForm()
-    context = {'title': "สมัครสมาชิก",'form': form}
+    context['title'] = 'สมัตรสมาชิค'
+    context['form'] = form
     return render(request,'reports/register.html', context=context)
 
 @login_required
