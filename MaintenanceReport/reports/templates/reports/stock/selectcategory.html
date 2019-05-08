@@ -13,6 +13,21 @@
 {% endblock %}
 
 {% block content %}
+{{ searchcat }}
+<div class="container my-5 ">
+    <div class="row my-3">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <form method="POST" class="form-inline">
+                {% csrf_token %}
+                <input class="form-control form-control mr-sm-2" type="text" name="searchcat" placeholder="Search.."
+                       aria-label="Search.."
+                       value="">
+                <input type="submit" value="search" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+</div>
 <div class="container my-4">
     <h1 class="">ชุดอุปกรณ์</h1>
     <div class="row border border-primary rounded p-3 my-3 px-5 py-3">
@@ -25,7 +40,7 @@
                     <p class="card-text"><b>รหัสชุดอุปกรณ์ : {{category_item.c_code}} </b></p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted"><a href="{% url 'stockpick' category_item.id machine_id %}">เลือก</a></small>
+                        <a class="btn btn-success" href="{% url 'stockpick' category_item.id machine_id %}">เลือก</a>
                 </div>
             </div>
         </div>

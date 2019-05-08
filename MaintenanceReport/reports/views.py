@@ -1,4 +1,5 @@
 import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
@@ -10,7 +11,7 @@ from graphos.renderers import gchart
 from graphos.sources.model import ModelDataSource
 
 from .models import Maintenance, Category, Category_Part, Part, Cart, Order, Machine_Category, Machine, Employee
-from .forms import RegisterModelForm, ReportModelForm, ReportForm
+from .forms import RegisterModelForm, ReportModelForm, ReportForm, DateSelectForm
 
 
 @login_required
@@ -98,8 +99,8 @@ def my_register(request):
             check.employee_id = user.id
             form.save()
             return redirect('index')
-
-    form = RegisterModelForm()
+    else:
+        form = RegisterModelForm()
     context = {'title': "สมัครสมาชิก",'form': form}
     return render(request,'reports/register.html', context=context)
 
@@ -157,25 +158,49 @@ def my_logout(request):
 def stock_list(request, category_id, machine_id):
     data_stock = []
     object_list = Category.objects.filter(id=category_id)
-    for stock in object_list:
-        category_part = Category_Part.objects.filter(c=stock.id)
-        for part_list in category_part:
-            part = Part.objects.filter(id=part_list.p_id)
-            for detail in part:
-                data_stock.append({
-                    'c_name': stock.c_name,
-                    'p_id': part_list.p_id,
-                    'part_code': detail.part_code,
-                    'cost': detail.cost,
-                    'part_desc': detail.part_desc,
-                    'stock': detail.stock,
-                    'minimum_stock': detail.minimum_stock
-                })
+    if request.method == 'POST':
+        print('check')
+        # searchpart = []
+        searchpart = request.POST.get('searchpart')
+        print(searchpart)
+        for stock in object_list:
+            category_part = Category_Part.objects.filter(c=stock.id)
+            for part_list in category_part:
+                part = Part.objects.filter(id=part_list.p_id, part_desc__icontains= searchpart)
+                print(part)
+                for detail in part:
+                    data_stock.append({
+                        'c_name': stock.c_name,
+                        'p_id': part_list.p_id,
+                        'part_code': detail.part_code,
+                        'cost': detail.cost,
+                        'part_desc': detail.part_desc,
+                        'stock': detail.stock,
+                        'minimum_stock': detail.minimum_stock
+                    })
+    else:
+        for stock in object_list:
+            category_part = Category_Part.objects.filter(c=stock.id)
+            searchpart = []
+            for part_list in category_part:
+                part = Part.objects.filter(id=part_list.p_id)
+                print(part)
+                for detail in part:
+                    data_stock.append({
+                        'c_name': stock.c_name,
+                        'p_id': part_list.p_id,
+                        'part_code': detail.part_code,
+                        'cost': detail.cost,
+                        'part_desc': detail.part_desc,
+                        'stock': detail.stock,
+                        'minimum_stock': detail.minimum_stock
+                    })
     context = {
         'stock_part': data_stock,
         'stock_list': object_list,
         'category_id': category_id,
-        'machine_id': machine_id
+        'machine_id': machine_id,
+        'text': searchpart
     }
 
     return render(request, template_name='reports/stock/stockpick.html', context=context)
@@ -285,71 +310,56 @@ def selectcategory(request, machine_id):
     data = []
     machine = Machine_Category.objects.filter(machine_id=machine_id)
     print(machine)
-    for category_list in machine:
-        category = Category.objects.filter(id=category_list.category_id)
-        machine_name = Machine.objects.get(pk=machine_id)
-        title = "อะไหล่อุปกรณ์ " + str(machine_name)
-        for item in category:
-            data.append({
-                'id': item.id,
-                'c_code': item.c_code,
-                'c_name': item.c_name,
-                'image': item.image
-            })
+    if request.method == 'POST':
+        print('check')
+        searchcat = request.POST.get('searchcat')
+        print(searchcat)
+        for category_list in machine:
+            category = Category.objects.filter(id=category_list.category_id, c_name__icontains=searchcat)
+            machine_name = Machine.objects.get(pk=machine_id)
+            title = "อะไหล่อุปกรณ์ " + str(machine_name)
+            for item in category:
+                data.append({
+                    'id': item.id,
+                    'c_code': item.c_code,
+                    'c_name': item.c_name,
+                    'image': item.image
+                })
+    else:
+        for category_list in machine:
+            category = Category.objects.filter(id=category_list.category_id)
+            machine_name = Machine.objects.get(pk=machine_id)
+            title = "อะไหล่อุปกรณ์ " + str(machine_name)
+            searchcat = []
+            for item in category:
+                data.append({
+                    'id': item.id,
+                    'c_code': item.c_code,
+                    'c_name': item.c_name,
+                    'image': item.image
+                })
     context = {
         'title': title,
         'category': data,
-        'machine_id': machine_id
+        'machine_id': machine_id,
+        'text': searchcat
     }
     print("name %s" %title)
     return render(request, template_name='reports/stock/selectcategory.html', context=context)
 
 def selectmachine(request):
-    machine = Machine.objects.all()
+    if request.method == 'POST':
+        print('check')
+        searchmac = request.POST.get('searchmac')
+        print(searchmac)
+        machine = Machine.objects.filter(mac_name__icontains=searchmac)
+    else:
+        machine = Machine.objects.all()
     context = {
         'title': "รายการเครื่องจักรทอผ้า",
         'machine_list': machine
     }
     return render(request, template_name='reports/stock/selectmachine.html', context=context)
-
-
-def addmachine(request):
-    context = {}
-    CategoryFormSet = formset_factory(CategoryModelForm, extra=3)
-
-    if request.method == 'POST':
-        form = MachineModelForm(request.POST)
-        formset = CategoryFormSet(request.POST)
-        if form.is_valid():
-            machine = form.save()
-            if formset.is_valid():
-                for category_form in formset:
-                    try:
-                        if category_form.cleaned_data.get('c_code'):
-                            check = Category.objects.get(c_code=category_form.cleaned_data.get('c_code'))
-                            Machine_Category.objects.create(
-                                category_id=check.id,
-                                machine_id=machine.mac_id
-                            )
-                    except Category.DoesNotExist:
-                        if category_form.cleaned_data.get('c_code'):
-                            check = Category.objects.create(
-                                c_code=category_form.cleaned_data.get('c_code'),
-                                c_name=category_form.cleaned_data.get('c_name')
-                            )
-                            Machine_Category.objects.create(
-                                category_id=check.id,
-                                machine_id=machine.mac_id
-                            )
-                return redirect('managemachine')
-    else:
-        form = MachineModelForm()
-        formset = CategoryFormSet()
-
-    context['form'] = form
-    context['formset'] = formset
-
-    return render(request, template_name='reports/addmachine.html', context=context)
 
 
 def managemachine(request):
@@ -364,17 +374,18 @@ def managemachine(request):
 def graph(request):
     data = []
     machinedataset = []
-    # form = GraphForm
-
-    # x = {}
-    # order = Order.objects.values('for_machine_id').annotate(one_count=models.Sum('quantity', filter=models.Q(part_id=1)),
-    #                                                         two_count=models.Sum('quantity', filter=models.Q(part_id=2))).order_by('for_machine_id')
-    order = Order.objects.values('part_id').annotate(models.Sum('quantity')).order_by()
-    maintenance = Maintenance.objects.values('machine_id').annotate(check=models.Count('machine_id'))
+    if request.method == 'POST':
+        form = DateSelectForm(request.POST)
+        if form.is_valid():
+            prev = form.cleaned_data.get('start_date')
+            now = form.cleaned_data.get('end_date')
+    else:
+        form = DateSelectForm()
+        prev = datetime.date.today().replace(day=1)
+        now = datetime.date.today() + datetime.timedelta(days=1)
+    order = Order.objects.filter(datetime__gte=prev, datetime__lte=now).values('part_id').annotate(models.Sum('quantity')).order_by('-quantity__sum')
+    maintenance = Maintenance.objects.filter(datetime__gte=prev, datetime__lte=now).values('machine_id').annotate(check=models.Count('machine_id'))
     print(maintenance)
-    # print(order[0].quantity__sum)
-    # for item in order:
-    #     print(item['part_id'])
     print(order)
     for item in order:
         part = Part.objects.get(pk=item['part_id'])
@@ -395,23 +406,11 @@ def graph(request):
 
     print(data)
     print(machinedataset)
-    # data_source = ModelDataSource(order, fields=['for_machine_id', 'one_count', 'two_count'])
-    # chart = gchart.BarChart(data_source)
     context = {
         'title': 'ยอดสรุปผลการซ่อม',
         'chart':     'chart',
         'data': order,
         'datatest':data,
-        'datamaintenance': machinedataset}
-    # # for i in data:
-    #
-    # print(type(data))
-    # context = {
-    #     'title': 'ยอดสรุปผลการซ่อม',
-    #     'data': data
-    # }
+        'datamaintenance': machinedataset,
+        'form': form}
     return render(request, template_name='reports/graph.html', context=context)
-
-# def ma(request):
-#     context = {}
-#     return render(request, template_name='reports/graph.html', context=context)

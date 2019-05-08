@@ -33,7 +33,7 @@
     display: block;
     margin: 0 auto;
     width: 60%;
-    padding: 70px 0px;
+    padding: 50px 0px;
   }
 
   h1 {
@@ -117,22 +117,23 @@
 
 {% block content %}
 <div class="container" style="margin-top: 10vh">
-  <img class="logo" alt="Social Vue" src="http://i65.tinypic.com/zmbomd.png" />
+  <img class="logo" alt="โรงงานทอผ้าเดลต้า" src="https://www.deltathailand.com/en/images/about-logo.png" />
   <h1>Welcome</h1>
 
-  <form  action="{% url 'login' %}" method="POST">
+  <form  action="{% url 'login' %}" method="POST" >
     {% csrf_token %}
     {% if error %}
     <span style="color:red; text-align: center">{{ error }}</span>
     {% endif %}
+    <br>
+    <input type="text" name="username" placeholder="Username" style="font-size: medium">
+    <input type="password" name="password" placeholder="Password" style="font-size: medium">
 
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
+    <br>
 
     <input type="hidden" name="next_url" value="{{next_url}}">
     <input type="submit" value="LOGIN"><br>
-    <a href="#">Forgot password?</a>
-
+<!--    <a href="#">Forgot password?</a>/-->
   </form>
 </div>
 
