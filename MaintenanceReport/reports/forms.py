@@ -16,7 +16,7 @@ class RegisterModelForm(forms.ModelForm):
 
         phone = cleaned_data.get('emp_phone')
 
-        if len(phone) < 10 & phone[0] == "0":
+        if len(phone) < 10:
            raise forms.ValidationError('กรุณาตรวจสอบเบอร์โทรศัพท์')
 
 
