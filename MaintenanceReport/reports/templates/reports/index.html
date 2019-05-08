@@ -26,7 +26,17 @@
 {% block content %}
 <div class="containerPage my-5">
     <div class="row">
-        <h1 class=" col-6">รายการแจ้งซ้อมอุปกรณ์</h1>
+        <h1 class=" col-12">รายการแจ้งซ้อมอุปกรณ์</h1>
+        {% if user.groups.all.0.name == "engineer"%}
+        &nbsp;&nbsp;&nbsp;&nbsp;<form method="post">
+        {% csrf_token %}
+          <input type="radio" name="check" value="all"> All
+          <input type="radio" name="check" value="pending"> Pending
+          <input type="radio" name="check" value="inprogress"> Inprogress
+          <input type="radio" name="check" value="succeed"> Succeed
+          <input type="submit" value="Submit">
+        </form>
+        {%endif%}
 <!--        {{ user.groups.all.0}}-->
     </div>
     <div class="border border-primary rounded p-3 my-3 px-5 py-3">

@@ -27,7 +27,18 @@ def index(request):
     data = []
     context = {'title': "รายการแจ้งซ่อม",}
     print(request.user)
-    test = Maintenance.objects.all().order_by('-datetime')
+    if request.method == 'POST':
+        check = request.POST.get('check')
+        if check == 'all':
+            test = Maintenance.objects.all().order_by('-datetime')
+        elif check == 'pending':
+            test = Maintenance.objects.filter(state='Pending').order_by('datetime')
+        elif check == 'inprogress':
+            test = Maintenance.objects.filter(state='Inprogress').order_by('datetime')
+        elif check == 'succeed':
+            test = Maintenance.objects.filter(state='Succeed').order_by('-datetime')
+    else:
+        test = Maintenance.objects.all().order_by('-datetime')
     for detail in test.all():
         emp = Employee.objects.get(pk = detail.employee_id)
         emp_fname = emp.emp_fname
