@@ -15,7 +15,6 @@ urlpatterns = [
     path('deleteitem/<int:part_id>/<int:for_machine_id>', views.deleteitem, name='deleteitem'),
     path('selectcategory/<int:machine_id>', views.selectcategory, name='selectcategory'),
     path('selectmachine/', views.selectmachine, name='selectmachine'),
-    path('managemachine/', views.managemachine, name='managemachine'),
     path('graph/', views.graph, name='graph'),
     path('additem/<int:part_id>/<int:for_machine_id>/<int:employee_id>', views.additem, name='additem'),
     path('decreaseitem/<int:part_id>/<int:for_machine_id>/<int:employee_id>', views.decreaseitem, name='decreaseitem')

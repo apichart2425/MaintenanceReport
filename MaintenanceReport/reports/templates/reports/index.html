@@ -2,43 +2,58 @@
 
 {% load static %}
 {% block stylepage %}
-    <style>
+<style>
 
-        .headtable{
-            font-size: 2.5vh;
-            text-align: left;
-            font-weight: bold;
-        }
-        .textCenter{
-            text-align: center;
-            font-size: 2vh;
-        }
-        .containerPage {
-            width: 100%;
-            padding-right: 10vh;
-            padding-left: 10vh;
-            margin-right: auto;
-            margin-left: auto;
-        }
-    </style>
+    .headtable{
+        font-size: 2.5vh;
+        text-align: left;
+        font-weight: bold;
+    }
+    .textCenter{
+        text-align: center;
+        font-size: 2vh;
+    }
+    .containerPage {
+        width: 100%;
+        padding-right: 10vh;
+        padding-left: 10vh;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="containerPage my-5">
     <div class="row">
-        <h1 class=" col-6">รายการแจ้งซ้อมอุปกรณ์</h1>
-<!--        {{ user.groups.all.0}}-->
+        <h1 class=" col-8">รายการแจ้งซ้อมอุปกรณ์</h1>
+
+        {% if user.groups.all.0.name == "engineer"%}
+        <div class="col-4">
+            &nbsp;&nbsp;&nbsp;&nbsp;<form method="post" class="">
+            {% csrf_token %}
+
+            <input  type="radio" name="check" value="all" checked> All
+            <input type="radio" name="check" value="pending"> Pending
+            <input type="radio" name="check"  value="inprogress"> Inprogress
+            <input type="radio" name="check"  value="succeed"> Succeed
+            <input class="btn btn-primary" type="submit" value="Submit">
+
+        </form>
+        </div>
+        {%endif%}
+        <!--        {{ user.groups.all.0}}-->
     </div>
     <div class="border border-primary rounded p-3 my-3 px-5 py-3">
         <table class="table table-hover">
             <thead>
-                <tr class="headtable row">
-                    <th class="col-2">เครื่องจักร</th>
-                    <th class="col-2">วันเวลา</th>
-                    <th class="col-2">ผู้แจ้ง</th>
-                    <th class="col-4">รายละเอียด</th>
-                    <th class="col-2">สถานะ</th>
-                </tr>
+            <tr class="headtable row">
+                <th class="col-2">เครื่องจักร</th>
+                <th class="col-2">วันเวลา</th>
+                <th class="col-2">ผู้แจ้ง</th>
+                <th class="col-4">รายละเอียด</th>
+                <th class="col-2">สถานะ</th>
+            </tr>
             </thead>
             {% for form in formset %}
             <tr class="row">
