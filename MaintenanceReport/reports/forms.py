@@ -13,8 +13,20 @@ class RegisterModelForm(forms.ModelForm):
         cleaned_data = super().clean()
         new = cleaned_data.get('password')
         repass = cleaned_data.get('re_password')
+
+        phone = cleaned_data.get('emp_phone')
+
+        if len(phone) < 10 & phone[0] == "0":
+           raise forms.ValidationError('กรุณาตรวจสอบเบอร์โทรศัพท์')
+
+
         if new != repass:
             raise forms.ValidationError('"รหัสผ่าน" และ "ยืนยันรหัสผ่าน" ต้องเหมือนกัน')
+        if len(new) < 8 or len(repass) < 8:
+            raise forms.ValidationError('รหัสผ่านต้องมีตัวอักษรมากกว่า 8 ตัวอักษร')
+
+
+
     class Meta:
         model = Employee
         exclude = ['employee']

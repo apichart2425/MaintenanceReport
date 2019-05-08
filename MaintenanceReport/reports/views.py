@@ -74,6 +74,7 @@ def my_register(request):
     if request.method == 'POST':
         form = RegisterModelForm(request.POST)
         if form.is_valid():
+
             user = User.objects.create_user(
                 username = form.cleaned_data.get('user'),
                 password = form.cleaned_data.get('password'),

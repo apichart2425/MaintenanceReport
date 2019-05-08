@@ -2,36 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d012afa-62bf-4331-921c-fbbb4b23ba6d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/media/images/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/15.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/16.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/17.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/test_iqvpbwB.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/reports/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reports/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/reports/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/graph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/selectcategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/selectcategory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/selectmachine.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/selectmachine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/templates/reports/stock/stockpick.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/templates/reports/stock/stockpick.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/reports/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reports/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/reports/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,32 +15,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reports/views.py">
+        <entry file="file://$PROJECT_DIR$/reports/templates/reports/register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="362" selection-start-line="362" selection-end-line="362" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/reports/templates/reports/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="131" column="6" selection-start-line="131" selection-start-column="6" selection-end-line="131" selection-end-column="6" />
-              <folding>
-                <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="1275">
+              <caret line="75" selection-start-line="75" selection-end-line="75" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reports/templates/reports/register.html">
+        <entry file="file://$PROJECT_DIR$/reports/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="68">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reports/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,10 +73,8 @@
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/machine.html" />
         <option value="$PROJECT_DIR$/reports/admin.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/settings.py" />
-        <option value="$PROJECT_DIR$/reports/forms.py" />
         <option value="$PROJECT_DIR$/MaintenanceReport/urls.py" />
         <option value="$PROJECT_DIR$/reports/urls.py" />
-        <option value="$PROJECT_DIR$/reports/views.py" />
         <option value="$PROJECT_DIR$/reports/templates/reports/managemachine.html" />
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/cart.html" />
         <option value="$PROJECT_DIR$/reports/templates/reports/detail.html" />
@@ -118,12 +87,14 @@
         <option value="$PROJECT_DIR$/reports/templates/reports/graph.html" />
         <option value="$PROJECT_DIR$/reports/templates/reports/stock/selectcategory.html" />
         <option value="$PROJECT_DIR$/reports/templates/reports/login.html" />
+        <option value="$PROJECT_DIR$/reports/views.py" />
+        <option value="$PROJECT_DIR$/reports/forms.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="240" />
-    <option name="y" value="126" />
+    <option name="y" value="125" />
     <option name="width" value="1440" />
     <option name="height" value="775" />
   </component>
@@ -230,18 +201,19 @@
       <workItem from="1557154970760" duration="1281000" />
       <workItem from="1557157192490" duration="8932000" />
       <workItem from="1557192048098" duration="11156000" />
-      <workItem from="1557278649564" duration="877000" />
+      <workItem from="1557278649564" duration="1798000" />
+      <workItem from="1557280875378" duration="785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102728000" />
+    <option name="totallyTimeSpent" value="104434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1575067" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15951742" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -252,7 +224,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.30410182" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.16407356" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.16407356" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -293,23 +265,6 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reports/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="42" column="36" lean-forward="true" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reports/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="73" column="26" lean-forward="true" selection-start-line="73" selection-start-column="26" selection-end-line="73" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -448,20 +403,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reports/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="362" selection-start-line="362" selection-end-line="362" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reports/templates/reports/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reports/templates/reports/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
@@ -469,6 +410,37 @@
           <folding>
             <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/templates/reports/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
