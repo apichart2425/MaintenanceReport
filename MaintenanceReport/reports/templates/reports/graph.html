@@ -6,13 +6,23 @@
 {% block content %}
 <div class="container">
     <br>
-<form method="POST">
-    {% csrf_token %}
-    Start Date :{{ form.start_date }}
-    EndDate :{{ form.end_date }}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row ml-5" >
+            <div class="col-3 form-group">
+                StartDate :
+                <label for="">{{ form.start_date }}</label>
+            </div>
+            <div class="col-3 form-group">
+                EndDate :
+                <label for="">{{ form.end_date }}</label>
+            </div>
+             <input class="btn btn-primary my-4" type="submit" value="ยืนยัน" style="height: 5%;width: 7%;">
 
-    <input type="submit" value="ยืนยัน">
-</form>
+        </div>
+
+
+    </form>
     <br>
 </div>
 <div class="container my-3">
@@ -90,45 +100,45 @@
 </script>
 <script>
     Highcharts.chart('pie', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'ยอดรายการแจ้งซ่อมเครื่องจักร'
-    },
-    tooltip: {
-        pointFormat: 'จำนวนการแจ้งซ่อม: {point.y:.0f} ครั้ง <b><br>คิดเป็น : {point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'ยอดรายการแจ้งซ่อมเครื่องจักร'
+        },
+        tooltip: {
+            pointFormat: 'จำนวนการแจ้งซ่อม: {point.y:.0f} ครั้ง <b><br>คิดเป็น : {point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 }
             }
-        }
-    },
-    series: [{
-        name: 'เครื่องจักร',
-        colorByPoint: true,
-        data: [
+        },
+        series: [{
+            name: 'เครื่องจักร',
+            colorByPoint: true,
+            data: [
 
             {% for check in datamaintenance %}
             {
                 name:'{{check.machine_name}}  ',
                 y: {{ check.check }}
-        },
-        {% endfor %}
-        ]
+    },
+    {% endfor %}
+    ]
     }]
-});
+    });
 
 </script>
 {% endblock %}
