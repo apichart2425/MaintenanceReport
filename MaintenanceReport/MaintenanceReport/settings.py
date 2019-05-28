@@ -80,8 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'webproject',
         'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'password',
+        'HOST': '209.97.171.159',
         'PORT': '3306'
     }
 }
@@ -133,4 +133,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'login/'
-

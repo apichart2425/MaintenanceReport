@@ -37,11 +37,11 @@ class PartAdmin(admin.ModelAdmin):
 
 
 class MachineAdmin(admin.ModelAdmin):
-    list_display = ['mac_id', 'mac_name', 'mac_sum', 'mac_desc', 'image_tag']
+    list_display = ['mac_id', 'mac_name', 'mac_desc', 'image_tag']
     readonly_fields = ('image_tag',)
     list_per_page = 10
     ordering = ('mac_id',)
-
+    search_fields=['mac_name']
     inlines = [CategoryInLine]
 
 class MaintenanceAdmin(admin.ModelAdmin):
